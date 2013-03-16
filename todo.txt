@@ -1,0 +1,21 @@
+-----voute nid d'abeille :
+
+
+-----general :
+
+- boite de parametres avec : finesse, couleur fond, couleur chevron ...
+
+- mettre en place la traduction
+
+-----zome :
+
+- revoir calcul et explication cercle inscrit et circonscrit, pour que les gens puissent préparer leur plancher avant
+
+
+-----heliyourte :
+
+- tissu, lais à découper avec qPainter, dessin capote
+
+
+pour le géodome rajouter implantation au sol
+pour tous, rajouter dans le pdf les valeurs choisies des paramètres ainsi que les valeurs surface, hauteur ...

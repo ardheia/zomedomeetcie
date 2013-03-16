@@ -1,0 +1,58 @@
+<RCC>
+    <qresource prefix="/">
+        <file>zdc.ico</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file alias="logoArdheia">images/logo-ardheia.jpg</file>
+        <file alias="filaire">images/filaire.png</file>
+        <file alias="plein">images/plein.png</file>
+        <file alias="fleche">images/fleche.png</file>
+        <file alias="licenseCC">images/license.png</file>
+    </qresource>
+    <qresource prefix="/images/vna">
+        <file alias="vnaAngleBeta">images/vna/angleBeta.jpg</file>
+        <file alias="vnaAssemblage">images/vna/assemblage.jpg</file>
+        <file alias="vnaAngleCoupe">images/vna/convention_angle_coupe.jpg</file>
+        <file alias="vnaAngleTracage">images/vna/convention_angle_tracage.jpg</file>
+        <file alias="vnaCoupeDeuxBouts">images/vna/coupe_deux_bouts.jpg</file>
+        <file alias="vnaDecalage">images/vna/decalage.jpg</file>
+        <file alias="vnaDroitCoupeBas">images/vna/droit_coupe_bas.jpg</file>
+        <file alias="vnaDroitCoupeHaut">images/vna/droit_coupe_haut.jpg</file>
+        <file alias="vnaDroitdeFace">images/vna/droit_de_face.jpg</file>
+        <file alias="vnaFixationFaitiere">images/vna/fixation_faitiere.jpg</file>
+        <file alias="vnaFixationSabliere">images/vna/fixation_sabliere.jpg</file>
+        <file alias="vnaGaucheCoupeBas">images/vna/gauche_coupe_bas.jpg</file>
+        <file alias="vnaGaucheCoupeHaut">images/vna/gauche_coupe_haut.jpg</file>
+        <file alias="vnaGauchedeFace">images/vna/gauche_de_face.jpg</file>
+        <file alias="vnaRives">images/vna/rives.jpg</file>
+        <file alias="vnaArriveeFaitiere">images/vna/arrivee_faitiere.jpg</file>
+        <file alias="vnaArriveeSabliere">images/vna/arrivee_sabliere.jpg</file>
+    </qresource>
+    <qresource prefix="/images/dna">
+        <file alias="dnaDroitdeFace">images/dna/dna_droit_de_face.jpg</file>
+        <file alias="dnaGauchedeFace">images/dna/dna_gauche_de_face.jpg</file>
+        <file alias="dnaSabliere">images/dna/dna_sabliere.jpg</file>
+    </qresource>
+    <qresource prefix="/images/zome">
+        <file alias="zomLosange">images/zome/losanges.jpg</file>
+        <file alias="zomAngle">images/zome/angleEntreLosanges.jpg</file>
+        <file alias="zomTriangle">images/zome/triangles.jpg</file>
+        <file alias="zomLosangePhoto">images/zome/losange_photo.jpg</file>
+        <file alias="zomMethode0">images/zome/methode0.jpg</file>
+        <file alias="zomOmega">images/zome/angle_omega.jpg</file>
+    </qresource>
+    <qresource prefix="/images/hly">
+        <file alias="hlyPerche">images/heliyourte/hly_perche.jpg</file>
+        <file alias="hlyTraverse">images/heliyourte/hly_traverse.jpg</file>
+        <file alias="hlyCroix">images/heliyourte/hly_croix.jpg</file>
+        <file alias="hlyMontantA">images/heliyourte/hly_montantA.jpg</file>
+        <file alias="hlyMontantC">images/heliyourte/hly_montantC.jpg</file>
+        <file alias="hlyTonoo">images/heliyourte/hly_tonoo.JPG</file>
+        <file alias="hlyAssemblage">images/heliyourte/hly_assemblage.jpg</file>
+        <file alias="hlyImplantation">images/heliyourte/hly_implantation.jpg</file>
+    </qresource>
+    <qresource prefix="/images/geo">
+        <file alias="geoArete">images/geo/arete.png</file>
+        <file alias="geoFace">images/geo/face.png</file>
+    </qresource>
+</RCC>

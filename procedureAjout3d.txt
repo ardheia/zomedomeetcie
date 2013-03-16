@@ -1,0 +1,8 @@
+1 - sous designer, ajouter un layout la ou on veut notre fenetre 3d, puis lui donner un LayoutName specifique : ex: layout3dzomePrincipal
+2 - sous fenprincipale.h, definir dans les private un nouveau pointeur GLWidget en lui donnant un nom genre glWidgetZomePrincipal
+3 - sous fenprincipale.cpp, declarer le nouveau pointeur : glWidgetZomePrincipal = new GLWidget("quoi afficher")
+                            ajouter le widget au layer par : ui->layout3dzomePrincipal->addWidget(glWidgetZomePrincipal);
+4 - sous widget.h, rajouter la classe genre zome au début
+                   et declarer le pointeur dans private
+5 - sous glwidget.cpp, ajouter le include correspondant au dessin3d, genre zome.h
+                       puis completer dans la fonction initializeGL() les if en fonction de "quoi afficher" pour indiquer quoi charger avec quel options.
