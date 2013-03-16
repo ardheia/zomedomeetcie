@@ -8,7 +8,7 @@ TARGET = zomedomeetcie
 TEMPLATE = app
 
 #la ligne suivante n est a rajouter que sous linux
-#LIBS += -lGLU
+LIBS += -lGLU
 
 # Input
 HEADERS += fenprincipale.h \
