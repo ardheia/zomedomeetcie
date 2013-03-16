@@ -19,3 +19,4 @@
 
 pour le géodome rajouter implantation au sol
 pour tous, rajouter dans le pdf les valeurs choisies des paramètres ainsi que les valeurs surface, hauteur ...
+et hop
