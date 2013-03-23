@@ -1,5 +1,5 @@
 
-CONFIG += 
+CONFIG +=
 QT       += core gui
 QT       += opengl
 QT       += xml
@@ -49,6 +49,7 @@ SOURCES += fenprincipale.cpp \
     geodome3d.cpp
 RESOURCES += tousLesDocs.qrc
 RC_FILE += tousLesDocs.rc  
+TRANSLATIONS = zomedomeetcie_en.ts
 
 OTHER_FILES += \
     todo.txt \

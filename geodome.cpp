@@ -23,7 +23,11 @@ void geodome::setParametres(int g_solideBase, int g_frequenceA, int g_frequenceB
     geo_diametre = g_diametre;
     geo_rayon = g_diametre/2.0;
     geo_hauteur = g_hauteur;
-    geo_angleRotation = radians(g_angleRotation+32);
+    //angle pour qu on ait 5 pointes dans le meme plan pour isocaedre
+    if(geo_solideBase == 2)
+        geo_angleRotation = radians(g_angleRotation+31.71747441);
+    else
+        geo_angleRotation = 0.0;
     //geo_ratioElliptique = g_ratioElliptique;
     geo_sabliereHorizontale = g_sabliereHorizontale;
     sommets.clear();
@@ -214,9 +218,13 @@ QString geodome::tableauFaces(int i)
     else
         wid = "";
     tableau = "<table "+wid+" cellpadding=\"2\" border=\"1\" align=\"center\"><tbody><tr>";
-    tableau += "<td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Type</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Nombre</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Surface (m2)</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Type Arêtes</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L1 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L2 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L3 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>H (m)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha 1 (°)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha 2 (°)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha3 (°)</strong></p></td></tr>";
+    tableau += "<td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Nombre")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Surface")+" (m2)</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type Arêtes")+"</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L1 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L2 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L3 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>H (m)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha 1 (°)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha 2 (°)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha3 (°)</strong></p></td></tr>";
     for(int i=0;i<typeFace.size();i++)
         tableau += "<tr><td bgcolor=\""+couleurInternet(i)+"\"><p align=\"center\"><strong>f"+str.setNum(i)+"</strong></p></td><td><p align=\"center\">"+str2.setNum(typeFace[i].fa.size())+"</p></td><td><p align=\"center\">"+str3.setNum(typeFace[i].surface,'f',2)+"</p></td><td><p align=\"center\">"+str4.setNum(typeFace[i].typar1)+"->"+str5.setNum(typeFace[i].typar2)+"->"+str6.setNum(typeFace[i].typar3)+"</p></td><td><p align=\"center\">"+str7.setNum(typeArete[typeFace[i].typar1].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str8.setNum(typeArete[typeFace[i].typar2].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str9.setNum(typeArete[typeFace[i].typar3].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str10.setNum(typeFace[i].h1,'f',2)+"</p></td><td><p align=\"center\">"+str11.setNum(degres(typeFace[i].angle1),'f',1)+"</p></td><td><p align=\"center\">"+str12.setNum(degres(typeFace[i].angle2),'f',1)+"</p></td><td><p align=\"center\">"+str13.setNum(degres(typeFace[i].angle3),'f',1)+"</p></td></tr>";
+    int tot_faces = 0;
+    for(int i = 0;i<typeFace.size();i++)
+        tot_faces += typeFace[i].fa.size();
+    tableau += "<tr><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("TOTAL")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+str.setNum(tot_faces)+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+str2.setNum(surfaceToit(),'f',2)+"</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td></tr>";
     tableau += "</tbody></table>";
 
     return tableau;
@@ -228,9 +236,16 @@ QString geodome::tableauMontants()
     QString tableau,str,str2,str3,str4,str5;
 
     tableau = "<table cellpadding=\"2\" border=\"1\" align=\"center\"><tbody><tr>";
-    tableau += "<td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Type</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Nombre</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Longueur (cm)</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Beta (°)</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Rapport Longueur</strong></p></td bgcolor=\"#cccc99\"></tr>";
+    tableau += "<td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Nombre")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Longueur")+" (cm)</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Beta (°)</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Rapport Longueur")+"</strong></p></td bgcolor=\"#cccc99\"></tr>";
     for(int i=0;i<typeArete.size();i++)
         tableau += "<tr><td bgcolor=\""+couleurInternet(i)+"\"><p align=\"center\"><strong>a"+str.setNum(i)+"</strong></p></td><td><p align=\"center\">"+str2.setNum(typeArete[i].ar.size())+"</p></td><td><p align=\"center\">"+str3.setNum(typeArete[i].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str4.setNum(degres(qAsin(typeArete[i].longueur/geo_diametre)),'f',1)+"</p></td><td><p align=\"center\">"+str5.setNum(typeArete[i].longueur/geo_diametre,'f',6)+"</p></td></tr>";
+    int tot_montant = 0;
+    for(int i = 0;i<typeArete.size();i++)
+        tot_montant += typeArete[i].ar.size();
+    double ml = 0.0;
+    for(int i=0;i<typeArete.size();i++)
+        ml += typeArete[i].ar.size()*typeArete[i].longueur;
+    tableau += "<tr><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("TOTAL")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+str.setNum(tot_montant)+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+str2.setNum(ml,'f',2)+" m</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td bgcolor=\"#cccc99\"></tr>";
     tableau += "</tbody></table>";
 
     return tableau;
@@ -238,14 +253,14 @@ QString geodome::tableauMontants()
 
 QString geodome::resultatMontants()
 {
-    QString str,str2,str3,resu;
+    QString str,resu;
 
     double ml = 0.0;
     for(int i=0;i<typeArete.size();i++)
         ml += typeArete[i].ar.size()*typeArete[i].longueur;
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Le tableau suivant détaille les arêtes (a) du géodome : pour chaque type, il donne le nombre d\'éléments, leur longueur, ainsi que l'angle de bout. Cet angle est celui avec lequel il vont arriver sur le connecteur. Si vous travaillez avec des montants en bois, il correspond à l\'angle d\'inclinaison de la scie pour couper les extrémités du montant.</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attention, les longueurs sont données sans prendre en compte les éventuelles dimensions des connecteurs. Il faudra donc en tenir compte pour tailler les montants, sinon vous allez simplement vous retrouver avec un géodome un peu plus grand.</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Métrage linéaire des montants (à multiplier par la section de vos montants pour avoir le débit) :<strong> "+str.setNum(ml,'f',2)+"</strong> m.</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Le tableau suivant détaille les arêtes (a) du géodome : pour chaque type, il donne le nombre d\'éléments, leur longueur, ainsi que l'angle de bout. Cet angle est celui avec lequel il vont arriver sur le connecteur. Si vous travaillez avec des montants en bois, il correspond à l\'angle d\'inclinaison de la scie pour couper les extrémités du montant")+".</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Attention, les longueurs sont données sans prendre en compte les éventuelles dimensions des connecteurs. Il faudra donc en tenir compte pour tailler les montants, sinon vous allez simplement vous retrouver avec un géodome un peu plus grand")+".</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Métrage linéaire des montants (à multiplier par la section de vos montants pour avoir le débit)")+" :<strong> "+str.setNum(ml,'f',2)+"</strong> m.</p>";
     return resu;
 }
 
@@ -253,19 +268,19 @@ QString geodome::resultatFaces()
 {
     QString str,resu;
 
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Le tableau suivant détaille les faces (f) du géodome : pour chaque type, il donne le nombre d\'éléments, la surface, le type des 3 arêtes qui la constitue, leurs longueurs respectives, les mesures des 3 angles du triangle ainsi que la côte H qui peut être utile pour tracer les faces.</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surface totale des faces (donc de toute la couverture du géodome) :<strong> "+str.setNum(surfaceToit(),'f',1)+"</strong> m².</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Les schémas suivants le tableau sont dessinés avec les bonnes côtes et angles, mais à échelle réduite bien sur. </p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Le tableau suivant détaille les faces (f) du géodome : pour chaque type, il donne le nombre d\'éléments, la surface, le type des 3 arêtes qui la constitue, leurs longueurs respectives, les mesures des 3 angles du triangle ainsi que la côte H qui peut être utile pour tracer les faces")+".</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Surface totale des faces (donc de toute la couverture du géodome)")+" :<strong> "+str.setNum(surfaceToit(),'f',1)+"</strong> m².</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Les schémas suivants le tableau sont dessinés avec les bonnes côtes et angles, mais à échelle réduite bien sur")+". </p>";
     return resu;
 }
 
 QString geodome::resultatSommets()
 {
-    QString str,resu;
+    QString resu;
 
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Le tableau suivant détaille les sommets (s) du géodome (ou connecteurs) : pour chaque type, il donne le nombre d\'éléments, s\'ils représentent un noeud complet ou un noeud qui n\'a pas de faces tout autour de lui, le type des arêtes qui partent de ce noeud, le type des faces autour de ce noeud et les angles alpha\'. Les données précedentes sont données pour chaque noeud, en tournant dans le sens horaire si on regarde le noeud depuis l\'extérieur du géodome.</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attention, les angles alpha\' sont les angles projetés sur une surface plane (leur somme fait 360°), ce ne sont pas les angles des différentes faces, ces derniers étant un peu inférieurs et donnés à l\'onglet faces</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Les schémas suivants le tableau sont dessinés avec les bons angles.</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Le tableau suivant détaille les sommets (s) du géodome (ou connecteurs) : pour chaque type, il donne le nombre d\'éléments, s\'ils représentent un noeud complet ou un noeud qui n\'a pas de faces tout autour de lui, le type des arêtes qui partent de ce noeud, le type des faces autour de ce noeud et les angles alpha\'. Les données précedentes sont données pour chaque noeud, en tournant dans le sens horaire si on regarde le noeud depuis l\'extérieur du géodome")+".</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Attention, les angles alpha\' sont les angles projetés sur une surface plane (leur somme fait 360°), ce ne sont pas les angles des différentes faces, ces derniers étant un peu inférieurs et donnés à l\'onglet faces")+"</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Les schémas suivants le tableau sont dessinés avec les bons angles")+".</p>";
     return resu;
 }
 
@@ -273,8 +288,32 @@ QString geodome::aideConstruction()
 {
     QString str,resu;
 
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Le géodome est une stucture construite à partir d\'un des 3 polyèdres réguliers à faces triangulaires : le tetraèdre à 4 faces, l\'octaèdre à 8 faces et l\'isocaèdre à 20 faces. Chaque face est ensuite divisées régulièrement grace aux deux paramètres de fréquence A et B. Les points obtenus sont ensuite projetés sur une sphère et reliés entre eux.</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Différentes méthodes sont possibles pour construire et assembler des géodomes. La documentation concernant les géodomes (ou géodes, ou domes géodesiques) est abondante sur internet.</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Le géodome est une stucture construite à partir d\'un des 3 polyèdres réguliers à faces triangulaires : le tetraèdre à 4 faces, l\'octaèdre à 8 faces et l\'isocaèdre à 20 faces. Chaque face est ensuite divisées régulièrement grace aux deux paramètres de fréquence A et B. Les points obtenus sont ensuite projetés sur une sphère et reliés entre eux")+".</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Différentes méthodes sont possibles pour construire et assembler des géodomes. La documentation concernant les géodomes (ou géodes, ou domes géodesiques) est abondante sur internet")+".</p>";
+    resu += "<span style=\"font-size: 12pt; color: #ff9900;\"><strong><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Rappel des paramètres constructifs importants")+" :</p></strong></span>";
+    QString cha,str2;
+    if(geo_solideBase==0)
+        cha = "III "+str.setNum(geo_frequenceA)+" "+str2.setNum(geo_frequenceB);
+    if(geo_solideBase==1)
+        cha = "IV "+str.setNum(geo_frequenceA)+" "+str2.setNum(geo_frequenceB);
+    if(geo_solideBase==2)
+        cha = "V "+str.setNum(geo_frequenceA)+" "+str2.setNum(geo_frequenceB);
+
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Type de géodome")+" : "+cha+" ("+QObject::tr("chiffres romains pour indiquer solide de base : III pour tetraedre, IV pour octaedre, V pour isocaèdre; deuxième et troisième chiffres : fréquence A et fréquence B")+")</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Diamètre au sol, pour implantation")+" : "+str.setNum(rayon*2.0,'f',2)+" m</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Diamètre de la sphère")+" : "+str.setNum(geo_diametre,'f',2)+" m</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Hauteur réelle, jusqu'au faîtage")+" : "+str.setNum(geoHauteurReelle,'f',2)+" m</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Surface au sol")+" : "+str.setNum(surfaceSol(),'f',2)+" m²</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Surface de couverture")+" : "+str.setNum(surfaceToit(),'f',2)+" m²</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Volume approché")+" : "+str.setNum(volume(),'f',2)+" m3</p>";
+    if(geo_sabliereHorizontale==0)
+        cha = QObject::tr("non");
+    else
+        cha = QObject::tr("oui");
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Sablière horizontale")+" : "+cha+"</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Angle de rotation")+" : "+str.setNum(degres(geo_angleRotation),'f',0)+"°</p>";
+
+
     return resu;
 }
 
@@ -289,7 +328,7 @@ QString geodome::tableauSommets(int i)
     else
         wid = "";
     tableau = "<table "+wid+" cellpadding=\"2\" border=\"1\" align=\"center\"><tbody><tr>";
-    tableau += "<td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Type</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Nombre</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Complet</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Type Arêtes</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Type Faces</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Angles Alpha\' °</strong></p></td></tr>";
+    tableau += "<td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Nombre")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Complet")+"</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type Arêtes")+"</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type Faces")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Angles")+" Alpha\' °</strong></p></td></tr>";
     for(int i=0;i<typeSommet.size();i++)
     {
         QString enchVect = "";
@@ -326,6 +365,10 @@ QString geodome::tableauSommets(int i)
             tro = "non";
         tableau += "<tr><td bgcolor=\""+couleurInternet(i)+"\"><p align=\"center\"><strong>s"+str.setNum(i)+"</strong></p></td><td><p align=\"center\">"+str2.setNum(typeSommet[i].somet.size())+"</p></td><td><p align=\"center\">"+tro+"</p></td><td><p align=\"center\">"+enchVect+"</p></td><td><p align=\"center\">"+enchFace+"</p></td><td><p align=\"center\">"+enchAngPl+"</p></td></tr>";
     }
+    int tot_sommet = 0;
+    for(int i = 0;i<typeSommet.size();i++)
+        tot_sommet += typeSommet[i].somet.size();
+    tableau += "<tr><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("TOTAL")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+str.setNum(tot_sommet)+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong></strong></p></td></tr>";
     tableau += "</tbody></table>";
 
     return tableau;

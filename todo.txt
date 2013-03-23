@@ -19,4 +19,4 @@
 
 pour le géodome rajouter implantation au sol
 pour tous, rajouter dans le pdf les valeurs choisies des paramètres ainsi que les valeurs surface, hauteur ...
-et hop
+pour geodome bug si d = 5,50 m, h = 3 et mis a plat oui

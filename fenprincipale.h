@@ -106,6 +106,7 @@ private slots:
     void on_geoAngleRotation_valueChanged();
     void on_geoSabliereHorizontale_currentIndexChanged(int choix);
     void on_geoAffichage_currentIndexChanged(int choix);
+    void on_ongletsGeodome_currentChanged(int choix);
 
     // la c'est les actions des menus
     void on_actionA_propos_activated();
