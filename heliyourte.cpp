@@ -12,7 +12,7 @@ heliyourte::heliyourte()
 {
 }
 
-void heliyourte::setParametres(double h_diametreYourte, double h_hauteurMurs, int h_nbrePans, double h_penteToit, double h_epaisseurPerche, double h_retombeePerche, double h_depassementHautPerche, double h_retombeeTonoo, double h_retombeeTraverse, double h_epaisseurCroix, double h_retombeeCroix, double h_epaisseurLiteaux)
+void heliyourte::setParametres(double h_diametreYourte, double h_hauteurMurs, int h_nbrePans, double h_penteToit, double h_epaisseurPerche, double h_retombeePerche, double h_depassementHautPerche, double h_retombeeTonoo, double h_retombeeTraverse, double h_epaisseurCroix, double h_retombeeCroix)
 {
     // transfert des parametres on met tout en metres
     hel_diametreYourte = h_diametreYourte;
@@ -26,7 +26,6 @@ void heliyourte::setParametres(double h_diametreYourte, double h_hauteurMurs, in
     hel_retombeeTraverse = h_retombeeTraverse/100.0;
     hel_epaisseurCroix = h_epaisseurCroix/100.0;
     hel_retombeeCroix = h_retombeeCroix/100.0;
-    hel_epaisseurLiteaux = h_epaisseurLiteaux/100.0;
 
     calcul();
 }
@@ -296,7 +295,9 @@ QString heliyourte::debit()
     resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Débit Total")+"</strong></span></p>";
     hly_debitTotal = hly_debitPerche+hly_debitTraverse+hly_debitCroix+hly_debitMontantsAetC+hly_debitMontantB;
     resu += "<p>"+QObject::tr("Soit un débit total de bois pour toute l\'héliyourte de")+" <strong>"+str.setNum(hly_debitTotal,'f',2)+"</strong> m3.</p>";
-
+    resu += "<p></p>";
+    resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Liteaux")+"</strong></span></p>";
+    resu += "<p>"+QObject::tr("Il ne faut pas oublier de rajouter le débit pour les liteaux, le plus simple étant de prendre des liteaux de la même longueur que les perches, de section 35*35 ou 40*40 mm et d\'en prévoir un multiple entier du nombre de perches, de façon à ce que, sur les traverses en haut des murs, la distance maximale entre 2 liteaux ne soit pas supérieur à 50 cm. Par exemple, pour une longueur de traverse d\'environ 1,50 m, prévoir 3 fois plus de liteaux que de perches")+".</p>";
     return resu;
 }
 
@@ -309,15 +310,26 @@ QString heliyourte::aideGenerale()
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("L\'héliyourte est un concept en license libre Créative Commons, les publications au sujet de l\'héliyourte doivent donc citer leur source et mentionner le label Créative Commons")+".</p>";
     resu += "<p align=center><a href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/fr/\"><img height=\"31\" width=\"88\" src=\":/images/licenseCC\" /></a></p>";
     resu += "<p><br /></p>";
-    resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B) "+QObject::tr("La structure")+"</span></strong></span></p>";
+    resu += "<html><p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B) "+QObject::tr("Rappel des paramètres constructifs importants")+"</strong></span></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("diamètre yourte")+" : <strong>"+str.setNum(hel_diametreYourte,'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("hauteur des murs")+" : <strong>"+str.setNum(hel_hauteurMurs,'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("nombre de pans")+" : <strong>"+str.setNum(hel_nbrePans)+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("pente du toit")+" : <strong>"+str.setNum(degres(hel_penteToit),'f',0)+" °</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("volume")+" : <strong>"+str.setNum(volume(),'f',1)+" m3</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("surface au sol")+" : <strong>"+str.setNum(surfaceAuSol(),'f',1)+" m2</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("surface toit")+" : <strong>"+str.setNum(surfaceToit(),'f',1)+" m2</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("surface mur")+" : <strong>"+str.setNum(surfaceMur(),'f',1)+" m2</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("hauteur dessus tonoo")+" : <strong>"+str.setNum(hauteurTonoo(),'f',2)+" m</strong></p>";
+    resu += "<p><br /></p>";
+    resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) "+QObject::tr("La structure")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Découpez et assemblez les différents éléments en testant au fur et à mesure les assemblages dans les poteaux, ça sera plus simple à ajuster maintenant qu\'au montage. Pour les éléments de croix, une foix en place il vont se croiser à peu près dans le même plan ... Si vous avez choisi une épaisseur fine, pas de problèmes, sinon, il pourra être nécessaire de les amincir là où ils se croisent, sans pour autant raliser un mi-bois. Il peut être intéressant de travailler directement avec du bois séché et raboté, vous économiserez du temps et des bras")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Prévoyez à l\'avance la position de vos ouvertures, car vous ne serez pas obligés de tailler de croix pour les murs où seront posées les ouvertures, et donc pas forcément de trous dans les montants de chaque côté de l'\'ouverture pour les croix. Ca vous évitera du travail et ça sera plus \"propre\"")+".</p>";
     resu += "<p align=center><img height=\"400\" width=\"297\" src=\":/images/hly/hlyAssemblage\" /></p>";
     resu += "<p><br /></p>";
-    resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) "+QObject::tr("Implantation")+"</span></strong></span></p>";
+    resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D) "+QObject::tr("Implantation")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Pour préparez le plancher qui va acceuillir la yourte, voici les dimensions à prendre en compte")+" : <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r ("+QObject::tr("rayon du cercle passant par les poteaux")+") : <strong> "+str.setNum(hel_rayonYourte+0.02,'f',2)+" m</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h : <strong> "+str2.setNum((hel_rayonYourte+0.02)*qCos(hel_angleDivision/2.0),'f',2)+" m</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d ("+QObject::tr("distance entre les poteaux")+") : <strong> "+str3.setNum(2.0*(hel_rayonYourte+0.02)*qSin(hel_angleDivision/2.0),'f',2)+" m</strong></p>";
     resu += "<p align=center><img height=\"649\" width=\"600\" src=\":/images/hly/hlyImplantation\" /></p>";
     resu += "<p><br /></p>";
-    resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D) "+QObject::tr("Le montage")+"</span></strong></span></p>";
+    resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E) "+QObject::tr("Le montage")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Dans un premier temps, nous allons évidemment commencer par assembler les murs. Pour le premier, vous pouvez le faire au sol. Positionnez à peu près les 2 poteaux, un de chaque côté, emboîtez l\'élément de croix qui, lorsqu\'on est à l\'intérieur de la yourte, part en bas à gauche et finit en haut à droite. Il sera sûrement nécessaire d\incliner un des poteaux afin de venir clipser l\'élément de croix dans ses 2 trous")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Une fois cette étape réalisée, vous pouvez mettre en place la traverse entre les deux poteaux")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Vous pourrez enfin venir verrouiller votre mur avec le deuxième élément de croix, en le clipsant d\'abord dans son trou en bas à droite puis en venant le clipser en haut à gauche dans son encoche. Afin qu'il ne sorte pas de son encoche, vous pourrez le visse dans le montant C. Une vis au centre de la croix sera aussi utile, vous pouvez la cacher en la mettant depuis l'extérieur de la yourte")+".</p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Une fois tout les murs assemblés, il vous faut poser les perches. La première sera mise en place et soutenue en l\'air. Vous pouvez utiliser à cette effet un \"étai\" fait maison que vous enleverez à la fin. La deuxième vient donc se fixer sur la première, et ainsi de suite jusqu\'à la dernière, qu\'il faut arriver à la fois à clipser sur l\'avant dernière et à glisser sous la première, ce qui se fait en soulevant un peu l\'étai de la première. Et voilà !")+"</p>";
     resu += "<p align=center><img height=\"300\" width=\"400\" src=\":/images/hly/hlyTonoo\" /></p>";

@@ -299,20 +299,19 @@ QString geodome::aideConstruction()
     if(geo_solideBase==2)
         cha = "V "+str.setNum(geo_frequenceA)+" "+str2.setNum(geo_frequenceB);
 
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Type de géodome")+" : "+cha+" ("+QObject::tr("chiffres romains pour indiquer solide de base : III pour tetraedre, IV pour octaedre, V pour isocaèdre; deuxième et troisième chiffres : fréquence A et fréquence B")+")</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Diamètre au sol, pour implantation")+" : "+str.setNum(rayon*2.0,'f',2)+" m</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Diamètre de la sphère")+" : "+str.setNum(geo_diametre,'f',2)+" m</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Hauteur réelle, jusqu'au faîtage")+" : "+str.setNum(geoHauteurReelle,'f',2)+" m</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Surface au sol")+" : "+str.setNum(surfaceSol(),'f',2)+" m²</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Surface de couverture")+" : "+str.setNum(surfaceToit(),'f',2)+" m²</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Volume approché")+" : "+str.setNum(volume(),'f',2)+" m3</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Type de géodome")+" : <strong>"+cha+"</strong> ("+QObject::tr("chiffres romains pour indiquer solide de base : III pour tetraedre, IV pour octaedre, V pour isocaèdre; deuxième et troisième chiffres : fréquence A et fréquence B")+")</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Diamètre au sol, pour implantation")+" : <strong>"+str.setNum(rayon*2.0,'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Diamètre de la sphère")+" : <strong>"+str.setNum(geo_diametre,'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Hauteur réelle, jusqu'au faîtage")+" : <strong>"+str.setNum(geoHauteurReelle,'f',2)+" m</strong></p>";
     if(geo_sabliereHorizontale==0)
         cha = QObject::tr("non");
     else
         cha = QObject::tr("oui");
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Sablière horizontale")+" : "+cha+"</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Angle de rotation")+" : "+str.setNum(degres(geo_angleRotation),'f',0)+"°</p>";
-
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Sablière horizontale")+" : <strong>"+cha+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Angle de rotation")+" : <strong>"+str.setNum(degres(geo_angleRotation),'f',0)+"°</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Surface au sol")+" : <strong>"+str.setNum(surfaceSol(),'f',2)+" m²</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Surface de couverture")+" : <strong>"+str.setNum(surfaceToit(),'f',2)+" m²</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("Volume approché")+" : <strong>"+str.setNum(volume(),'f',2)+" m3</strong></p>";
 
     return resu;
 }

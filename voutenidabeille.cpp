@@ -14,12 +14,34 @@ vouteNidAbeille::vouteNidAbeille()
 
 QString vouteNidAbeille::explicationGenerale()
 {
-    QString str,str2,resu;
+    QString str,str2,resu,cha;
 
     resu = "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A) "+QObject::tr("Généralités")+"</strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("La charpente en nid d\'abeille, évolution des charpentes de Philibert de l\'Orme (1510-1570), permet comme ces dernières d\'utiliser des bois de faible section, comme des planches de 30 ou 40 mm d\'épaisseur et de longueur courte (environ 2 m 30 maximum)")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Ce type de charpente renvoie toute sa poussée sur les sablières, comme toute voûte, et il est nécessaire d\'équilibrer cette force qui a tendance à pousser les sablières vers l\'extérieur en \"retenant\" les sablières avec des \"entraits\"")+". <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Un soliveage de plancher, au même niveau que les sablières et avec les solives placées perpendiculairement aux sablières remplira très bien ce rôle d\'entrait. De même si les sablières sont fixées à une dalle d\'un seul tenant")+".</p>";
     resu += "<p><br /></p>";
-    resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B) "+QObject::tr("Les chevrons")+"</span></strong></span></p>";
+    resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B) "+QObject::tr("Rappel des paramètres constructifs importants")+"</strong></span></p>";
+    if(vna_choixType == 0)
+        cha = QObject::tr("régulier avec faîtière");
+    if(vna_choixType == 1)
+        cha = QObject::tr("régulier sans faîtière");
+    if(vna_choixType == 2)
+        cha = QObject::tr("irrégulier");
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("type de voute")+" : <strong>"+cha+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("profondeur voute")+" : <strong>"+str.setNum(vna_profondeurVoute,'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("hauteur dessus faîtière")+" : <strong>"+str.setNum(vna_hauteurVoute,'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("portée (écartement extérieur des 2 sablières)")+" : <strong>"+str.setNum(vna_portee,'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("rayon de courbure")+" : <strong>"+str.setNum(vna_rayonCourbureVoute,'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("nombre de rangées horizontales de losanges entiers")+" : <strong>"+str.setNum(vna_rangeesVerticales)+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("angle de losange")+" Beta : <strong>"+str.setNum(degres(vna_angleBeta),'f',0)+" °</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("décalage noeud")+" : <strong>"+str.setNum(vna_decalageNoeud*100.0,'f',1)+" cm</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("distance noeud / faitiere")+" : <strong>"+str.setNum(vna_distanceNoeudFaitiere*100.0,'f',1)+" cm</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("distance noeud / sabliere")+" : <strong>"+str.setNum(vna_distanceNoeudSabliere*100.0,'f',1)+" cm</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("distance noeud / rive gauche")+" : <strong>"+str.setNum(vna_distanceNoeudRiveGauche*100.0,'f',1)+" cm</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("volume")+" : <strong>"+str.setNum(volume(),'f',1)+" m3</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("surface au sol")+" : <strong>"+str.setNum(vna_profondeurVoute*vna_portee,'f',1)+" m2</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("surface de toit")+" : <strong>"+str.setNum(surfaceDeToit(),'f',1)+" m2</strong></p>";
+    resu += "<p><br /></p>";
+    resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) "+QObject::tr("Les chevrons")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Précisons tout d\'abord que nous allons partir de planches rectangulaires et tailler ensuite la forme courbe de chaque chevron")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Il est possible de ne tailler que l\'extrados du chevron courbe, en gardant l\'intrados rectiligne, cela permet, pour une même largeur de planches de départ, une meilleure solidité, mais néanmoins une esthétique différente (voute moins lisse de l\'intérieur) par rapport à des chevrons dont l\'intrados est courbe")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Il y a 2 types de chevrons, les chevrons penchés à droite (quand on regarde la voute de l\'extérieur, leur bas est à gauche et le haut va vers la droite) et les chevrons penchés à gauche. Les chevrons de type penché à gauche sont les symétriques de chevrons de type penché à droite par rapport à un plan (comme si l\'un était le reflet de l\'autre dans un miroir)")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("N\'importe quel chevron est symétrique par rapport à un axe bissecteur qui passe dans la moitié de son épaisseur, parallèle à sa largeur")+".</p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("La méthode proposée pour tailler les chevrons est la suivante")+" :</p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>I</strong> - "+QObject::tr("marquer un chevron \"gabarit\": sur une planche, tracer le dessin d\'un chevron en marquant bien ses points les plus loins de son centre (soit W, soit V, ça dépend)")+".</p>";
@@ -29,36 +51,36 @@ QString vouteNidAbeille::explicationGenerale()
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>IV</strong> - "+QObject::tr("une fois tous les chevrons découpés, vous pouvez biseauter les bouts (une fois dans un sens pour les chevrons penchés à droite, une fois dans l\'autre pour les chevrons penchés à gauche). Pour cela, vous pouvez utiliser une scie à onglets à inclinaison variable, ou une scie circulaire avec l\'angle de la lame réglable")+".</p>";
     resu += "<p align=center><img height=\"162\" width=\"400\" src=\":/images/vna/vnaAngleCoupe\" /></p>";
     resu += "<p><br /></p>";
-    resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) "+QObject::tr("Les chevrons de bord")+"</span></strong></span></p>";
+    resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D) "+QObject::tr("Les chevrons de bord")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Ce sont juste des chevrons classiques sur lesquels on va garder un bout (ou aucun) et re-biseauter un nouveau bout ailleurs (ou les deux). Si vous vous y prenez bien, vous pouvez souvent loger plusieurs chevrons de bord dans un chevron normal")+".</p>";
     resu += "<p><br /></p>";
-    resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D) "+QObject::tr("Les sablières")+"</span></strong></span></p>";
+    resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E) "+QObject::tr("Les sablières")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Les sablières sont des pièces fixées sur une assise plane et stable. Les chevrons de bord de type penché à droite viennent s\'y fixer à intervalles réguliers de")+" <strong> "+str.setNum(vna_diagonaleHorizontaleLosange*100.0,'f',1)+" </strong> cm "+QObject::tr("avec un angle d\'arrivée de")+" <strong> "+str2.setNum(degres(vna_angleChevronBordSabliere),'f',1)+" </strong> °.</p>";
     resu += "<p align=center><img height=\"140\" width=\"400\" src=\":/images/vna/vnaArriveeSabliere\" /></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Afin de bloquer le mouvement des assemblages au niveau des sablières, on pourra rajouter de cales")+".</p>";
     resu += "<p align=center><img height=\"141\" width=\"250\" src=\":/images/vna/vnaFixationSabliere\" /></p>";
     resu += "<p><br /></p>";
-    resu += "<p><strong><span style=\"font-size: 12pt; color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E) "+QObject::tr("Les rives")+"</span></strong></p>";
+    resu += "<p><strong><span style=\"font-size: 12pt; color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F) "+QObject::tr("Les rives")+"</span></strong></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Les rives courbes, pourront être obtenues en \"lamellé cloué\", en assemblant plusieurs rangées de planches jusqu\'à obtenir l\'épaisseur voulue. Les planches seront vissées ou clouées entre elles et les jonctions de chaque rangées seront décalées avec les rangées suivantes")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Les chevrons de bord d\'un même type y arrivent avec un intervalle vertical régulier de")+" <strong> "+str.setNum(vna_diagonaleVerticaleLosange*100.0,'f',1)+" </strong> cm.</p>";
     resu += "<p align=center><img height=\"273\" width=\"250\" src=\":/images/vna/vnaRives\" /></p>";
     resu += "<p><br /></p>";
     if(vna_choixType!=1)
     {
-        resu += "<p><strong><span style=\"font-size: 12pt; color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F) "+QObject::tr("La faitière")+"</span></strong></p>";
+        resu += "<p><strong><span style=\"font-size: 12pt; color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G) "+QObject::tr("La faitière")+"</span></strong></p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("La faitière est une pièce massive sur laquelle viendront se fixer (vis ou clous) les bouts des chevrons de bord. On pourra rajouter des cales pour bloquer le mouvement latéral des bouts de chevrons")+".</p>";
         resu += "<p align=center><img height=\"141\" width=\"250\" src=\":/images/vna/vnaFixationFaitiere\" /></p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Les chevrons de bord de type penchés à droite y arrivent avec un angle de")+"<strong> "+str.setNum(degres(vna_angleChevronBordFaitiere),'f',1)+" </strong> ° "+QObject::tr("et  l\'intervalle horizontal, toujours le même est de")+"<strong> "+str2.setNum(vna_diagonaleHorizontaleLosange*100.0,'f',1)+" </strong>cm.</p>";
         resu += "<p align=center><img height=\"140\" width=\"400\" src=\":/images/vna/vnaArriveeFaitiere\" /></p>";
         resu += "<p><br /></p>";
     }
-    resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G) "+QObject::tr("Fixations des noeuds")+"</strong></span></p>";
+    resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;H) "+QObject::tr("Fixations des noeuds")+"</strong></span></p>";
     resu += "<p align=center><img height=\"223\" width=\"199\" src=\":/images/vna/vnaAssemblage\" /></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("L\'assemblage ne se fait pas au milieu des chevrons, il faut respecter une valeur de décalage du noeud. Sinon, le noeud pourrait pivoter, le décalage assurant la rigidité de la structure")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Les chevrons seront premièrement cloués ou vissés en bout au niveau des assemblages. Ensuite, si la structure est soumise à de fortes contraintes, il sera nécessaire de solidifier par un boulonnage: tige filetée, écroux, et rondelles crantées si possibles")+".</p>";
     resu += "<p><br /></p>";
-    resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;H) "+QObject::tr("Montage structure")+"</span></strong></span></p>";
+    resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I) "+QObject::tr("Montage structure")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Le montage débute par la mise en place des sablières, rives et de la faitière (si il y en a une), cette dernière devant être étayée. Ensuite il suffit de choisir un coin entre la sablière et une des 2 rives et commencer à poser une rangée, puis l\'autre ... en prenant soin d\'étayer le travail tant que tout n\'a pas été posé")+".</p>";
     resu += "<p><br /></p>";
-    resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I) "+QObject::tr("Couverture, Ouvertures")+"</span></strong></span></p>";
+    resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;J) "+QObject::tr("Couverture, Ouvertures")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Pour couvrir ce genre de structure, on peut voliger directement sur les chevrons ou poser un liteaunage horizontal. Les matériaux de couvertures pourront être la tuile, le bardeau de bois, l\'ardoise")+" ...<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Si l\'on désire effectuer une ouverture style velux, on prendra soin de consolider la structure au niveau du chevêtre")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Si une porte de grandes dimensions doit être effectuées (style hangar), on reprendra le poids de la charpente par un linteau et deux poteaux descendant au sol")+".</p>";
 
     return resu;

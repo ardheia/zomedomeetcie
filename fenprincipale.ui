@@ -105,13 +105,13 @@
                    <widget class="QToolBox" name="toolBox">
                     <property name="minimumSize">
                      <size>
-                      <width>245</width>
+                      <width>260</width>
                       <height>400</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>245</width>
+                      <width>260</width>
                       <height>16777215</height>
                      </size>
                     </property>
@@ -4579,13 +4579,13 @@
                    <widget class="QToolBox" name="toolBox_2">
                     <property name="minimumSize">
                      <size>
-                      <width>245</width>
+                      <width>260</width>
                       <height>400</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>245</width>
+                      <width>260</width>
                       <height>16777215</height>
                      </size>
                     </property>
@@ -6883,13 +6883,13 @@
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>245</width>
+                      <width>260</width>
                       <height>400</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>245</width>
+                      <width>260</width>
                       <height>16777215</height>
                      </size>
                     </property>
@@ -8427,13 +8427,13 @@
                    <widget class="QToolBox" name="toolBox_4">
                     <property name="minimumSize">
                      <size>
-                      <width>245</width>
+                      <width>260</width>
                       <height>400</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>245</width>
+                      <width>260</width>
                       <height>16777215</height>
                      </size>
                     </property>
@@ -8448,7 +8448,7 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>245</width>
+                       <width>260</width>
                        <height>639</height>
                       </rect>
                      </property>
@@ -8618,8 +8618,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>229</width>
-                       <height>470</height>
+                       <width>260</width>
+                       <height>639</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -8902,51 +8902,6 @@
                                 <widget class="QLabel" name="hlyRetombeeCroixTexte">
                                  <property name="text">
                                   <string>retombée</string>
-                                 </property>
-                                </widget>
-                               </item>
-                              </layout>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QGroupBox" name="groupBox_9">
-                            <property name="title">
-                             <string>Liteaux</string>
-                            </property>
-                            <layout class="QHBoxLayout" name="horizontalLayout_47">
-                             <item>
-                              <layout class="QFormLayout" name="formLayout_26">
-                               <property name="fieldGrowthPolicy">
-                                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-                               </property>
-                               <item row="0" column="0">
-                                <widget class="QLabel" name="hlyEpaisseurLiteauxTexte">
-                                 <property name="text">
-                                  <string>épaisseur</string>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item row="0" column="1">
-                                <widget class="QDoubleSpinBox" name="hlyEpaisseurLiteaux">
-                                 <property name="suffix">
-                                  <string> cm</string>
-                                 </property>
-                                 <property name="decimals">
-                                  <number>1</number>
-                                 </property>
-                                 <property name="minimum">
-                                  <double>2.000000000000000</double>
-                                 </property>
-                                 <property name="maximum">
-                                  <double>15.000000000000000</double>
-                                 </property>
-                                 <property name="singleStep">
-                                  <double>0.100000000000000</double>
-                                 </property>
-                                 <property name="value">
-                                  <double>4.000000000000000</double>
                                  </property>
                                 </widget>
                                </item>

@@ -28,6 +28,7 @@ public:
     double surfaceDeToit();
     double hauteur();
     double volume();
+    double diametreSol();
     double pointPlusEloigne();
     bool triangle(int num);
     void valeursZomeGenerales(QVector<QVector3D>& passageValeur);

@@ -14,7 +14,7 @@ class heliyourte
 {
 public:
     heliyourte();
-    void setParametres(double h_diametreYourte, double h_hauteurMurs, int h_nbrePans, double h_penteToit, double h_epaisseurPerche, double h_retombeePerche, double h_depassementHautPerche, double h_retombeeTonoo, double h_retombeeTraverse, double h_epaisseurCroix, double h_retombeeCroix, double h_epaisseurLiteaux);
+    void setParametres(double h_diametreYourte, double h_hauteurMurs, int h_nbrePans, double h_penteToit, double h_epaisseurPerche, double h_retombeePerche, double h_depassementHautPerche, double h_retombeeTonoo, double h_retombeeTraverse, double h_epaisseurCroix, double h_retombeeCroix);
     double surfaceAuSol();
     double hauteurTonoo();
     double volume();
@@ -39,7 +39,7 @@ public:
     double hel_diametreYourte, hel_hauteurMurs;
     int hel_nbrePans;
     double hel_penteToit, hel_epaisseurPerche, hel_retombeePerche, hel_depassementHautPerche, hel_depassementBasPerche;
-    double hel_retombeeTonoo, hel_retombeeTraverse, hel_epaisseurCroix, hel_retombeeCroix, hel_epaisseurLiteaux;
+    double hel_retombeeTonoo, hel_retombeeTraverse, hel_epaisseurCroix, hel_retombeeCroix;
     double hel_rayonYourte, hel_angleDivision, hel_dIntMur;
     double hel_hauteurTotale;
     double hel_rayonTonoo, hel_diametreTonoo, hel_dIntTonoo;

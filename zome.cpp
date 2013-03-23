@@ -64,6 +64,12 @@ double zome::volume()
     return vol;
 }
 
+double zome::diametreSol()
+{
+    return zom_diametreSolExt;
+}
+
+
 bool zome::triangle(int num)
 {
     if((num==(zom_rangees-1))&&(zom_rangees!=zom_nombreOrdre))
@@ -216,16 +222,31 @@ QString zome::explicationLosange(int num)
 
 QString zome::explicationGenerale()
 {
-    QString str,str2,str3,str4,str5,str6,resu;
+    QString str,str2,str3,str4,str5,str6,cha,resu;
+    resu = "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A) "+QObject::tr("Généralités")+"</strong></span></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("C\'est l\'américain Steve Bear qui fût le premier (?), dans les années soixante, à étudier sa géométrie et le développer pour l\'habitat. C'est lui aussi qui lui donna son nom, mariant le ZO de rhombizonaèdre et le ME du dôme")+".<br />";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Solide géométrique rythmé par les nombres (nombre de forme, nombre d\'ordre..), il rappelle des structures observables dans la nature, architectures minérales et végétales fondées sur le nombre d\'or. Il constitue en effet un assemblage de rangées de losanges successifs, ayant tous la même longueur de côté mais des rapport entre diagonales différents, enroulés en double hélice")+".</p>";
+    resu += "<p><br /></p>";
+    resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B) "+QObject::tr("Rappel des paramètres constructifs importants")+"</strong></span></p>";
+    if(zom_methodeConstruction == 1)
+        cha = QObject::tr("simple");
+    else
+        cha = QObject::tr("losanges");
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("méthode construction")+" : <strong>"+cha+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("nombre d\'ordre")+" <n> : <strong>"+str.setNum(zom_nombreOrdre)+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("nombre de forme")+" <k> : <strong>"+str.setNum(zom_nombreForme)+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("échelle")+" <l> : <strong>"+str.setNum(zom_petiteDiagonaleRangee1)+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("rangées")+" <r> : <strong>"+str.setNum(zom_rangees)+"</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("volume")+" : <strong>"+str.setNum(volume(),'f',1)+" m3</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("surface au sol")+" : <strong>"+str.setNum(surfaceAuSol(),'f',1)+" m2</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("surface de toit")+" : <strong>"+str.setNum(surfaceDeToit(),'f',1)+" m2</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("hauteur")+" : <strong>"+str.setNum(hauteur(),'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("diametre au sol")+" : <strong>"+str.setNum(zom_diametreSolExt,'f',2)+" m</strong></p>";
+    resu += "<p><br /></p>";
     switch(zom_methodeConstruction)
     {
     case 0: //methode losange
-
-        resu = "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A) "+QObject::tr("Généralités")+"</strong></span></p>";
-        resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("C\'est l\'américain Steve Bear qui fût le premier (?), dans les années soixante, à étudier sa géométrie et le développer pour l\'habitat. C'est lui aussi qui lui donna son nom, mariant le ZO de rhombizonaèdre et le ME du dôme")+".<br />";
-        resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Solide géométrique rythmé par les nombres (nombre de forme, nombre d\'ordre..), il rappelle des structures observables dans la nature, architectures minérales et végétales fondées sur le nombre d\'or. Il constitue en effet un assemblage de rangées de losanges successifs, ayant tous la même longueur de côté mais des rapport entre diagonales différents, enroulés en double hélice")+".</p>";
-        resu += "<p><br /></p>";
-        resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B) "+QObject::tr("Les losanges")+"</span></strong></span></p>";
+        resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) "+QObject::tr("Les losanges")+"</span></strong></span></p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Nous allons dans un premier temps faire du travail à la chaîne, c\'est-à-dire fabriquer tous les losanges")+".</p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("La méthode proposée pour tailler un losange est la suivante")+" :</p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>I</strong> - "+QObject::tr("couper les planches à la longueur brute")+".</p>";
@@ -233,16 +254,16 @@ QString zome::explicationGenerale()
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>III</strong> - "+QObject::tr("assembler les 4 planches en les vissant en bout afin de constituer un losange")+".</p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>IV</strong> - "+QObject::tr("renforcer les losanges avec un contreventement horizontal ou vertical si vous le souhaitez")+".</p>";
         resu += "<p><br /></p>";
-        resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) "+QObject::tr("Fixations des Losanges entre eux")+"</strong></span></p>";
+        resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D) "+QObject::tr("Fixations des Losanges entre eux")+"</strong></span></p>";
         resu += "<p align=center><img height=\"143\" width=\"208\" src=\":/images/zome/zomAngle\" /></p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("La méthode proposée pour l'assemblage des losanges entre eux est d'utiliser des tiges filetées préalablement coudées à l'angle Beta indiqué. Selon la taille de la structure, il peut être pertinent de mettre 2 ou 3 tiges filetées par côté de losange")+". <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Pour couder une tige fileté sans l'abimer, on utilisera par exemple un etau qui tient un côté entre des cales en bois, et de l'autre, un tube assez long pour avoir un bras de levier suffisant afin de couder")+".</p>";
         resu += "<p><br /></p>";
-        resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D) "+QObject::tr("Montage structure")+"</span></strong></span></p>";
+        resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E) "+QObject::tr("Montage structure")+"</span></strong></span></p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Le montage débute par la rangée du bas (les triangles) et on monte en tournant rangée par rangée, pour arriver au sommet à la rangée n°1")+".</p>";
         if(zom_nombreOrdre!=zom_rangees)
             resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Le diamètre au sol du cercle circonscrit au zome est de")+" <strong>"+str2.setNum(zom_diametreSolInt,'f',2)+"</strong> m, "+QObject::tr("le diamètre au sol du cercle passant par les pointes des triangles est de")+" <strong>"+str.setNum(zom_diametreSolExt,'f',2)+"</strong> m.</p>";
         resu += "<p><br /></p>";
-        resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E) "+QObject::tr("Couverture, Ouvertures, Isolation")+"</span></strong></span></p>";
+        resu += "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #ff9900;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F) "+QObject::tr("Couverture, Ouvertures, Isolation")+"</span></strong></span></p>";
         resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Pour couvrir ce genre de structure, on peut utiliser tous les types de couverture traditionnelle. On apportera cependant un soin tout particulier à toutes les arêtes, potentielles sources de fuite")+" ...<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Si l\'on désire effectuer une ouverture style velux, on prendra soin de consolider la structure au niveau du chevêtre")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Si une porte de grandes dimensions doit être effectuée (style hangar), on reprendra le poids de la charpente par un linteau et deux poteaux descendant au sol")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("L'isolation peut se faire directement dans les caissons avec un isolant rigide ou semi-rigide. Pour les jonctions, il peut être utile d\'utiliser un isolant souple que l\'on pourra comprimer comme de la laine de chanvre")+"</p>";
         resu += "<p><br /></p>";
         resu += "<p align=center><img height=\"502\" width=\"601\" src=\":/images/zome/zomLosangePhoto\" /></p>";
@@ -250,11 +271,7 @@ QString zome::explicationGenerale()
         break;
     case 1: //juste visualisation
         int nbrbarres;
-        resu = "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A) "+QObject::tr("Généralités")+"</strong></span></p>";
-        resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("C\'est l\'américain Steve Bear qui fût le premier (?), dans les années soixante, à étudier sa géométrie et le développer pour l\'habitat. C'est lui aussi qui lui donna son nom, mariant le ZO de rhombizonaèdre et le ME du dôme")+".<br />";
-        resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Solide géométrique rythmé par les nombres (nombre de forme, nombre d\'ordre..), il rappelle des structures observables dans la nature, architectures minérales et végétales fondées sur le nombre d\'or. Il constitue en effet un assemblage de rangées de losanges successifs, ayant tous la même longueur de côté mais des rapport entre diagonales différents, enroulés en double hélice")+".</p>";
-        resu += "<p><br /></p>";
-        resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B) "+QObject::tr("Dimensions")+"</span></strong></span></p>";
+        resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) "+QObject::tr("Dimensions")+"</span></strong></span></p>";
         if(zom_nombreOrdre!=zom_rangees)
             resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Le diamètre au sol du cercle inscrit au zome est de")+" <strong>"+str2.setNum(zom_diametreSolInt,'f',2)+"</strong> m, "+QObject::tr("le diamètre au sol du cercle circonscrit, c'est à dire passant par les pointes des triangles est de")+" <strong>"+str.setNum(zom_diametreSolExt,'f',2)+"</strong> m.</p>";
         if(zom_nombreOrdre==zom_rangees)

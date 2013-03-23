@@ -86,7 +86,6 @@ private slots:
     // la c est pour l heliyourte
     void on_hlyDiametreYourte_valueChanged();
     void on_hlyEpaisseurCroix_valueChanged();
-    void on_hlyEpaisseurLiteaux_valueChanged();
     void on_hlyEpaisseurPerche_valueChanged();
     void on_hlyHauteurMur_valueChanged();
     void on_hlyNombrePans_valueChanged();

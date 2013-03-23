@@ -36,7 +36,7 @@ fenPrincipale::fenPrincipale(QWidget *parent) :
 
     //on declare notre objet de calcul pour l heliyourte
     heliY = new heliyourte();
-    heliY->setParametres(fenPrincipale::ui->hlyDiametreYourte->value(),fenPrincipale::ui->hlyHauteurMur->value(),fenPrincipale::ui->hlyNombrePans->value(),fenPrincipale::ui->hlyPenteToit->value(),fenPrincipale::ui->hlyEpaisseurPerche->value(),fenPrincipale::ui->hlyRetombeePerches->value(),fenPrincipale::ui->hlyPercheDepassementHaut->value(),fenPrincipale::ui->hlyRetombeeTonoo->value(),fenPrincipale::ui->hlyRetombeeTraverse->value(),fenPrincipale::ui->hlyEpaisseurCroix->value(),fenPrincipale::ui->hlyRetombeeCroix->value(),fenPrincipale::ui->hlyEpaisseurLiteaux->value());
+    heliY->setParametres(fenPrincipale::ui->hlyDiametreYourte->value(),fenPrincipale::ui->hlyHauteurMur->value(),fenPrincipale::ui->hlyNombrePans->value(),fenPrincipale::ui->hlyPenteToit->value(),fenPrincipale::ui->hlyEpaisseurPerche->value(),fenPrincipale::ui->hlyRetombeePerches->value(),fenPrincipale::ui->hlyPercheDepassementHaut->value(),fenPrincipale::ui->hlyRetombeeTonoo->value(),fenPrincipale::ui->hlyRetombeeTraverse->value(),fenPrincipale::ui->hlyEpaisseurCroix->value(),fenPrincipale::ui->hlyRetombeeCroix->value());
 
     //on declare notre objet de calcul pour le geodome
     geode = new geodome();
@@ -641,7 +641,8 @@ void fenPrincipale::rafraichirResultatsZome()
     fenPrincipale::ui->ZomeSurfaceAuSol->setText(str.setNum(zomito->surfaceAuSol(),'f',1)+" m2 ");
     fenPrincipale::ui->zomeSurfaceDeToit->setText(str.setNum(zomito->surfaceDeToit(),'f',1)+" m2 ");
     fenPrincipale::ui->zomeVolume->setText(str.setNum(zomito->volume(),'f',1)+" m3 ");
-    fenPrincipale::ui->zomeHauteur->setText(str.setNum(zomito->hauteur(),'f',1)+" m ");
+    fenPrincipale::ui->zomeHauteur->setText(str.setNum(zomito->hauteur(),'f',2)+" m ");
+    fenPrincipale::ui->zomeDiametreSol->setText(str.setNum(zomito->diametreSol(),'f',2)+" m ");
 
     fenPrincipale::ui->zomeselectionLosange->clear();
     fenPrincipale::ui->zomeselectionLosange->addItems(zomito->listeLosanges());
@@ -754,7 +755,7 @@ void fenPrincipale::on_zomeRetombeeChevronMethode1_valueChanged()
 
 void fenPrincipale::rafraichirHeliyourte()
 {
-    heliY->setParametres(fenPrincipale::ui->hlyDiametreYourte->value(),fenPrincipale::ui->hlyHauteurMur->value(),fenPrincipale::ui->hlyNombrePans->value(),fenPrincipale::ui->hlyPenteToit->value(),fenPrincipale::ui->hlyEpaisseurPerche->value(),fenPrincipale::ui->hlyRetombeePerches->value(),fenPrincipale::ui->hlyPercheDepassementHaut->value(),fenPrincipale::ui->hlyRetombeeTonoo->value(),fenPrincipale::ui->hlyRetombeeTraverse->value(),fenPrincipale::ui->hlyEpaisseurCroix->value(),fenPrincipale::ui->hlyRetombeeCroix->value(),fenPrincipale::ui->hlyEpaisseurLiteaux->value());
+    heliY->setParametres(fenPrincipale::ui->hlyDiametreYourte->value(),fenPrincipale::ui->hlyHauteurMur->value(),fenPrincipale::ui->hlyNombrePans->value(),fenPrincipale::ui->hlyPenteToit->value(),fenPrincipale::ui->hlyEpaisseurPerche->value(),fenPrincipale::ui->hlyRetombeePerches->value(),fenPrincipale::ui->hlyPercheDepassementHaut->value(),fenPrincipale::ui->hlyRetombeeTonoo->value(),fenPrincipale::ui->hlyRetombeeTraverse->value(),fenPrincipale::ui->hlyEpaisseurCroix->value(),fenPrincipale::ui->hlyRetombeeCroix->value());
     glWidgetHeliyourte->rafraichirWidget(m_couleursDistinctes);
     glWidgetHeliyourteTraverse->rafraichirWidget(m_couleursDistinctes);
     glWidgetHeliyourteCroix->rafraichirWidget(m_couleursDistinctes);
@@ -797,11 +798,6 @@ void fenPrincipale::on_hlyDiametreYourte_valueChanged()
 }
 
 void fenPrincipale::on_hlyEpaisseurCroix_valueChanged()
-{
-    rafraichirHeliyourte();
-}
-
-void fenPrincipale::on_hlyEpaisseurLiteaux_valueChanged()
 {
     rafraichirHeliyourte();
 }
@@ -2021,16 +2017,6 @@ void fenPrincipale::ouvrir(QString nom)
                                 grandChild3 = grandChild3.nextSibling().toElement();
                             }
                         }
-                        if (grandChild2.tagName() == "liteau")
-                        {
-                            QDomElement grandChild3=grandChild2.firstChild().toElement();
-                            while(!grandChild3.isNull())
-                            {
-                                if (grandChild3.tagName() == "epaisseur")
-                                    fenPrincipale::ui->hlyEpaisseurLiteaux->setValue(grandChild3.text().toDouble());
-                                grandChild3 = grandChild3.nextSibling().toElement();
-                            }
-                        }
                         grandChild2 = grandChild2.nextSibling().toElement();
                     }
                 }
@@ -2350,12 +2336,6 @@ void fenPrincipale::enregistrer()
     hlyCroixNoeud.appendChild(hlyCroixEpaisseurNoeud);
     hlyCroixNoeud.appendChild(hlyCroixRetombeeNoeud);
     hlyboisNoeud.appendChild(hlyCroixNoeud);
-
-    QDomElement hlyLiteauNoeud = doc.createElement("liteau");
-    QDomElement hlyLiteauEpaisseurNoeud = doc.createElement("epaisseur");
-    hlyLiteauEpaisseurNoeud.appendChild(doc.createTextNode(str.setNum(fenPrincipale::ui->hlyEpaisseurLiteaux->value(),'f',1)));
-    hlyLiteauNoeud.appendChild(hlyLiteauEpaisseurNoeud);
-    hlyboisNoeud.appendChild(hlyLiteauNoeud);
 
     structureNoeud.appendChild(hlystructureNoeud);
 
