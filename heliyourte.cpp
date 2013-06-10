@@ -68,6 +68,11 @@ QString heliyourte::tableauTraverse()
     return tableau;
 }
 
+double heliyourte::diametreTonoo()
+{
+    return hel_diametreTonoo;
+}
+
 QString heliyourte::generalCroix()
 {
     QString str,str2,str3,resu;
@@ -212,7 +217,7 @@ QString heliyourte::PercheGeneral()
     QString str,str2,str3,resu;
 
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Il y a")+" "+str.setNum(hel_nbrePans)+" "+QObject::tr("perches, dont voici les plans ci-après. Les coordonnées des points sur la face supérieure de la planche sont notés V, ceux sur la face de derrière W. Les coordonnées des points W ne sont donnés que dans le cas où ils diffèrent de celles de leur point correspondant en V")+".</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Les dimensions des planches \"brutes\" dans lesquelles seront taillées les perches sont les suivantes")+" :<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Epaisseur")+" : "+str.setNum(hel_epaisseurPerche*100.0,'f',1)+" cm<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Retombée")+" : "+str2.setNum(hel_retombeePerche*100.0,'f',1)+" cm<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Longueur")+" : "+str3.setNum((hel_longueurMiniPlanchesPerches)*100.0,'f',1)+" cm</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Les dimensions des planches \"brutes\" dans lesquelles seront taillées les perches sont les suivantes")+" :<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Epaisseur")+" : "+str.setNum(hel_epaisseurPerche*100.0,'f',1)+" cm<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Retombée")+" : "+str2.setNum(hel_retombeeMiniPerches*100.0,'f',1)+" cm<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Longueur")+" : "+str3.setNum((hel_longueurMiniPlanchesPerches)*100.0,'f',1)+" cm</p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Au montage, les perches seront \"posées\" les unes sur les autres : la 2ème sur la première, la 3ème sur la 2ème et ainsi de suite jusqu\'à la dernière qui elle, recevra le poids de la première. C\'est ce qu \'on appelle une charpente autoportée. Afin que les perches restent en place, nous leur rajoutons un téton (au point I) perpendiculaire à la face V8-V9-W9-W8, au milieu de l\'épaisseur de la perche. Le plus simple à faire est de percer à ce point I pour y fixer une tige fileté (diamètre 8mm, ça suffit) qui sera vissé de 5 cm dans la perche et ressortira de 5-6 cm")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Afin que la perche puisse s\'enficher sur la précédente, il faudra percer en J, au milieu de l\'épaisseur de la perche et perpendiculairement à la face V2-V3-W3-W2, d\'une profondeur et d\'un diamètre un peu supérieur à ceux du téton")+".</p>";
     return resu;
 }
@@ -255,10 +260,10 @@ QString heliyourte::debit()
     resu = "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Perches")+"</strong></span></p>";
     resu += "<p>"+QObject::tr("Il faut")+" <strong>"+str.setNum(hel_nbrePans)+"</strong> "+QObject::tr("planches aux dimensions suivantes")+" :<br />";
     resu += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("epaisseur")+" : <strong>"+str.setNum(hel_epaisseurPerche*100.0,'f',1)+"</strong> cm<br />";
-    resu += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("retombée")+" : <strong>"+str.setNum(hel_retombeePerche*100.0,'f',1)+"</strong> cm<br />";
+    resu += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("retombée")+" : <strong>"+str.setNum(hel_retombeeMiniPerches*100.0,'f',1)+"</strong> cm<br />";
     resu += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "+QObject::tr("longueur")+" : <strong>"+str.setNum(hel_longueurMiniPlanchesPerches,'f',2)+"</strong> m</p>";
     double hly_debitPerche, hly_debitTraverse, hly_debitCroix, hly_debitMontantsAetC, hly_debitMontantB, hly_debitLiteaux, hly_debitTotal;
-    hly_debitPerche = hel_nbrePans*hel_epaisseurPerche*hel_retombeePerche*hel_longueurMiniPlanchesPerches;
+    hly_debitPerche = hel_nbrePans*hel_epaisseurPerche*hel_retombeeMiniPerches*hel_longueurMiniPlanchesPerches;
     resu += "<p>"+QObject::tr("Ce qui nous donne un débit pour les perches de")+" <strong>"+str.setNum(hly_debitPerche,'f',2)+"</strong> m3.</p>";
     resu += "<p></p>";
     resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Poteaux")+"</strong></span></p>";
@@ -320,6 +325,7 @@ QString heliyourte::aideGenerale()
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("surface toit")+" : <strong>"+str.setNum(surfaceToit(),'f',1)+" m2</strong></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("surface mur")+" : <strong>"+str.setNum(surfaceMur(),'f',1)+" m2</strong></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("hauteur dessus tonoo")+" : <strong>"+str.setNum(hauteurTonoo(),'f',2)+" m</strong></p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+QObject::tr("diamètre tonoo")+" : <strong>"+str.setNum(hel_diametreTonoo,'f',2)+" m</strong></p>";
     resu += "<p><br /></p>";
     resu += "<p><span style=\"color: #ff9900;\"><strong><span style=\"font-size: 12pt;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) "+QObject::tr("La structure")+"</span></strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Découpez et assemblez les différents éléments en testant au fur et à mesure les assemblages dans les poteaux, ça sera plus simple à ajuster maintenant qu\'au montage. Pour les éléments de croix, une foix en place il vont se croiser à peu près dans le même plan ... Si vous avez choisi une épaisseur fine, pas de problèmes, sinon, il pourra être nécessaire de les amincir là où ils se croisent, sans pour autant raliser un mi-bois. Il peut être intéressant de travailler directement avec du bois séché et raboté, vous économiserez du temps et des bras")+".<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+QObject::tr("Prévoyez à l\'avance la position de vos ouvertures, car vous ne serez pas obligés de tailler de croix pour les murs où seront posées les ouvertures, et donc pas forcément de trous dans les montants de chaque côté de l'\'ouverture pour les croix. Ca vous évitera du travail et ça sera plus \"propre\"")+".</p>";
@@ -457,6 +463,8 @@ void heliyourte::calcul()
 
     double phel_epaisseurVirtuelleAtournedeBeta3, phel_epaisseurVirtuelleBtournedeBeta3;
 
+    hel_cr.clear();
+    hel_cr_2.clear();
     hel_cr.resize(28);
     hel_cr_2.resize(28);
     // cote montant C
@@ -598,6 +606,9 @@ void heliyourte::calcul()
     cr3 = QVector2D(phel_cr_distanceEntre2B-qSin(hel_angleBeta3)*hel_epaisseurPlancheB/2.0,qCos(hel_angleBeta3)*hel_epaisseurPlancheB/2.0);
     cr2 = QVector2D(cr3.x()-qCos(hel_angleBeta3)*(hel_CdansA.distanceRapportBordInt),cr3.y()-qSin(hel_angleBeta3)*(hel_CdansA.distanceRapportBordInt));
     hel_angleVrilleCroix2 = qAtan((cr2.y()-cr1.y())/(cr2.x()-cr1.x()));
+
+    hel_perche_face.clear();
+    hel_perche_derriere.clear();
 
     //on reprend les coordonnes de la perche
     hel_perche_face << QVector2D(0.0,hel_hauteurMurs);

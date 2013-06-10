@@ -50,6 +50,8 @@
         <file alias="hlyTonoo">images/heliyourte/hly_tonoo.JPG</file>
         <file alias="hlyAssemblage">images/heliyourte/hly_assemblage.jpg</file>
         <file alias="hlyImplantation">images/heliyourte/hly_implantation.jpg</file>
+        <file alias="hlyToileMur">images/heliyourte/hly_toile_mur.JPG</file>
+        <file alias="hlyToileVue">images/heliyourte/hly_toile_vue.JPG</file>
     </qresource>
     <qresource prefix="/images/geo">
         <file alias="geoArete">images/geo/arete.png</file>

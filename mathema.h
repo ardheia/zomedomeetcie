@@ -69,7 +69,10 @@ QVector2D centreCercle2Points2DavecRayon2(QVector2D a, QVector2D b, double rayon
 QVector2D centreCercle3Points2D(QVector2D a, QVector2D b, QVector2D c);
 double rayonCercle3Points2D(QVector2D a, QVector2D b, QVector2D c);
 double angleHorizontalCentrePoint2D(QVector2D centre, QVector2D point);
+double angleHorizontalCentrePoint2D_2(QVector2D centre, QVector2D point);
 QVector3D intersectionDroiteAvecDroiteHorizontale(QVector3D premierPointDroite, QVector3D deuxiemePointDroite, double YdeLaDroiteHorizontale);
+QVector2D rotation2DautourOrigine(QVector2D a,double angle);
+double angleDeDifferenceDuPremierVersLeDeuxieme(double premierAngle, double secondAngle, bool horaire);
 
 //constantes
 double const pi=3.14159265;

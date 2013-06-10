@@ -812,6 +812,26 @@ double angleHorizontalCentrePoint2D(QVector2D centre, QVector2D point)
     return ang;
 }
 
+double angleHorizontalCentrePoint2D_2(QVector2D centre, QVector2D point)
+{
+    double ang;
+    if(point.x()==centre.x())
+    {
+        ang = pi/2.0;
+    }
+    else if(centre.x()<point.x())
+    {
+        ang = qAtan(qAbs(point.y()-centre.y())/(point.x()-centre.x()));
+    }
+    else if(centre.x()>point.x())
+    {
+        ang = pi-(qAtan(qAbs(point.y()-centre.y())/qAbs(point.x()-centre.x())));
+    }
+    if(point.y()<centre.y())
+        ang =2.0*pi-ang;
+    return ang;
+}
+
 QVector3D intersectionDroiteAvecDroiteHorizontale(QVector3D premierPointDroite, QVector3D deuxiemePointDroite, double YdeLaDroiteHorizontale)
 {
     double a,b;
@@ -820,4 +840,33 @@ QVector3D intersectionDroiteAvecDroiteHorizontale(QVector3D premierPointDroite, 
     b = premierPointDroite.y()-a*premierPointDroite.x();
     sol = QVector3D((YdeLaDroiteHorizontale-b)/a,YdeLaDroiteHorizontale,premierPointDroite.z());
     return sol;
+}
+
+QVector2D rotation2DautourOrigine(QVector2D a, double angle)
+{
+    QVector2D b = QVector2D(a.x()*qCos(angle)+a.y()*qSin(angle),-a.x()*qSin(angle)+a.y()*qCos(angle));
+    return b;
+}
+
+double angleDeDifferenceDuPremierVersLeDeuxieme(double premierAngle, double secondAngle, bool horaire)
+{
+    double res;
+    if(horaire)
+    {
+        while(secondAngle>premierAngle)
+        {
+            secondAngle -= 2.0*pi;
+        }
+        res = premierAngle-secondAngle;
+    }
+    else
+    {
+        while(secondAngle<premierAngle)
+        {
+            secondAngle += 2.0*pi;
+        }
+        res = secondAngle-premierAngle;
+    }
+    return res;
+
 }

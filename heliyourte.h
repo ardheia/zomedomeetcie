@@ -19,6 +19,7 @@ public:
     double hauteurTonoo();
     double volume();
     double surfaceMur();
+    double diametreTonoo();
     double surfaceToit();
     double pointPlusEloigne();
     QString tableauTraverse();

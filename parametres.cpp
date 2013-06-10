@@ -7,7 +7,7 @@ int finesse()
 
 QString version()
 {
-    return "13.03.16";
+    return "13.06.08";
 }
 
 QColor couleur(int num)

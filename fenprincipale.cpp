@@ -38,6 +38,9 @@ fenPrincipale::fenPrincipale(QWidget *parent) :
     heliY = new heliyourte();
     heliY->setParametres(fenPrincipale::ui->hlyDiametreYourte->value(),fenPrincipale::ui->hlyHauteurMur->value(),fenPrincipale::ui->hlyNombrePans->value(),fenPrincipale::ui->hlyPenteToit->value(),fenPrincipale::ui->hlyEpaisseurPerche->value(),fenPrincipale::ui->hlyRetombeePerches->value(),fenPrincipale::ui->hlyPercheDepassementHaut->value(),fenPrincipale::ui->hlyRetombeeTonoo->value(),fenPrincipale::ui->hlyRetombeeTraverse->value(),fenPrincipale::ui->hlyEpaisseurCroix->value(),fenPrincipale::ui->hlyRetombeeCroix->value());
 
+    toileY = new ToileYourte();
+    toileY->setParametres(fenPrincipale::ui->hlyHauteurMur->value(),fenPrincipale::ui->hlyPenteToit->value(),fenPrincipale::ui->hlyDiametreYourte->value(),heliY->hel_diametreTonoo,fenPrincipale::ui->hlyToileLargeurLaize->value(),fenPrincipale::ui->hlyToileOrientation->value(),fenPrincipale::ui->hlyToileDecalage->value());
+
     //on declare notre objet de calcul pour le geodome
     geode = new geodome();
     geode->setParametres(fenPrincipale::ui->geoSolideBase->currentIndex(),fenPrincipale::ui->geoFrequenceA->value(),fenPrincipale::ui->geoFrequenceB->value(),fenPrincipale::ui->geoDiametre->value(),fenPrincipale::ui->geoHauteur->value(),fenPrincipale::ui->geoAngleRotation->value(),fenPrincipale::ui->geoSabliereHorizontale->currentIndex(),fenPrincipale::ui->geoAffichage->currentIndex());
@@ -105,6 +108,7 @@ fenPrincipale::fenPrincipale(QWidget *parent) :
     ui->layout3dhlyPerche->addWidget(glWidgetHeliyourtePerche);
 
     rafraichirResultatsHeliyourte();
+    rafraichirResultatsHeliyourteToile();
 
     //la on declare nos fenetres 3d pour le geodome
     glWidgetGeodome = new GLWidget(geode,0);
@@ -139,7 +143,7 @@ void fenPrincipale::designFenetreAPropos()
     QString texteHTMLApropos;
     texteHTMLApropos = "<html><p align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Ce programme open-source")+" <a href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/fr/\"><img height=\"31\" width=\"88\" src=\":/images/licenseCC\" /></a> "+QObject::tr("est développé par")+"<strong> "+QObject::tr("l\'association")+" <a href=\"http://ardheia.free.fr\">"+QObject::tr("ARDHEIA")+"</a></strong>.</p>";
     texteHTMLApropos += "<p align=center><img src=\":/images/logoArdheia\" /></p>";
-    texteHTMLApropos += "<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Il est toujours en cours de développement, l'idée étant de réunir toutes nos anciens tableurs (dome,zome ...) en un programme plus convivial et fiable. Pour l'instant, vous pouvez visualiser les voutes,les dômes en nid d'abeille, les zomes, les héliyourtes, les géodomes")+". <em><strong>"+QObject::tr("A venir")+" :</strong></em> "+QObject::tr("Dôme Pomme de pin ...")+"</p>";
+    texteHTMLApropos += "<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Il est toujours en cours de développement, l'idée étant de réunir toutes nos anciens tableurs (dome,zome ...) en un programme plus convivial et fiable. Pour l'instant, vous pouvez visualiser les voutes,les dômes en nid d'abeille, les zomes, les héliyourtes (et la toile), les géodomes")+". <em><strong>"+QObject::tr("A venir")+" :</strong></em> "+QObject::tr("Dôme Pomme de pin ...")+"</p>";
     texteHTMLApropos += "<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Il est désormais possible d\'exporter n\'importe quelle vue 3D au format Wavefront Obj, pour l\'ouvrir avec un autre logiciel de 3D (Blender, Sketchup ...). Ceci peut être intéressant pour situer les structures dans des environnements ou pour prendre des côtes facilement")+".</p>";
     texteHTMLApropos += "<p align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Il est développé en C++ avec")+" <strong><a href=\"http://qt.nokia.com/title-fr/\">Qt</a>. </strong>"+QObject::tr("Les sources peuvent bien entendu être copiées, modifiées, diffusées à condition de citer la source")+" ...</p>";
     texteHTMLApropos += "<p align=justify>&nbsp;&nbsp;"+QObject::tr("Ce programme sert uniquement à visualiser en 3D les structures imaginées et à vous donner des infos concernant la construction. Il ne garantit en aucun cas la résistance mécanique des ouvrages et l'association ARDHEIA ne pourra donc pas être tenue responsable d'un mauvais dimensionnement d'une structure")+".</p>";
@@ -775,7 +779,8 @@ void fenPrincipale::rafraichirResultatsHeliyourte()
     fenPrincipale::ui->hlySurfaceDeToit->setText(str.setNum(heliY->surfaceToit(),'f',1)+" m2 ");
     fenPrincipale::ui->hlySurfaceMur->setText(str.setNum(heliY->surfaceMur(),'f',1)+" m2 ");
     fenPrincipale::ui->hlyVolume->setText(str.setNum(heliY->volume(),'f',1)+" m3 ");
-    fenPrincipale::ui->hlyHauteurTonoo->setText(str.setNum(heliY->hauteurTonoo(),'f',1)+" m ");
+    fenPrincipale::ui->hlyHauteurTonoo->setText(str.setNum(heliY->hauteurTonoo(),'f',2)+" m ");
+    fenPrincipale::ui->hlyDiametreTonoo->setText(str.setNum(heliY->diametreTonoo(),'f',2)+" m ");
     fenPrincipale::ui->hlyTraverseGeneralTexte->setText(heliY->generalTraverse());
     fenPrincipale::ui->hlytableTraverseText->setText(heliY->tableauTraverse());
     fenPrincipale::ui->hlyCroixGeneralTexte->setText(heliY->generalCroix());
@@ -894,6 +899,59 @@ void fenPrincipale::heliTestBugBoutPerche()
         QMessageBox::warning(this,QObject::tr("Dépassement haut de perche trop faible"),QObject::tr("Le dépassement horizontal haut de la perche ne peut etre inférieur à")+" "+str.setNum((double)(rajout),'f',1)+" cm, "+QObject::tr("ou alors il faut diminuer la retombée du tonoo, ou augmenter la pente du toit")+".");
         fenPrincipale::ui->hlyPercheDepassementHaut->setValue(rajout+0.01);
     }
+}
+
+void fenPrincipale::on_hlyToileLargeurLaize_valueChanged()
+{
+    rafraichirResultatsHeliyourteToile();
+}
+
+void fenPrincipale::on_hlyToileOrientation_valueChanged()
+{
+    rafraichirResultatsHeliyourteToile();
+}
+
+void fenPrincipale::on_hlyToileDecalage_valueChanged()
+{
+    rafraichirResultatsHeliyourteToile();
+}
+
+void fenPrincipale::on_hlyToileChoixMorceau_currentIndexChanged(int choix)
+{
+    rafraichirResultatsHeliyourteToileMorceau(choix);
+}
+
+void fenPrincipale::rafraichirResultatsHeliyourteToileMorceau(int ch)
+{
+    if(ch==-1)
+        ch = 0;
+    QLabel* image1 = new QLabel();
+    QPixmap pix(800,300);
+    toileY->toiDessinToileMorceau(&pix,ch);
+    image1->setPixmap(pix);
+    fenPrincipale::ui->hlyToileMorceauGrille->addWidget(image1,0.0,0.0);
+    fenPrincipale::ui->hlyToileMorceauTable->setText(toileY->toiCoordMorceau(ch));
+}
+
+void fenPrincipale::rafraichirHeliyourteToileDessinPrincipal()
+{
+    QLabel* image2 = new QLabel();
+    QPixmap pix2(700,700);
+    toileY->toiDessinToileGeneral(&pix2,0);
+    image2->setPixmap(pix2);
+    fenPrincipale::ui->hlyGrilleToileGeneral->addWidget(image2,0.0,0.0);
+}
+
+void fenPrincipale::rafraichirResultatsHeliyourteToile()
+{
+    toileY->setParametres(fenPrincipale::ui->hlyHauteurMur->value(),fenPrincipale::ui->hlyPenteToit->value(),fenPrincipale::ui->hlyDiametreYourte->value(),heliY->hel_diametreTonoo,fenPrincipale::ui->hlyToileLargeurLaize->value(),fenPrincipale::ui->hlyToileOrientation->value(),fenPrincipale::ui->hlyToileDecalage->value());
+
+    fenPrincipale::ui->hlyToileChoixMorceau->clear();
+    fenPrincipale::ui->hlyToileChoixMorceau->addItems(toileY->listeMorceaux());
+    fenPrincipale::ui->hlyToileChoixMorceau->setCurrentIndex(0);
+    rafraichirHeliyourteToileDessinPrincipal();
+    rafraichirResultatsHeliyourteToileMorceau(0);
+    fenPrincipale::ui->hlyExplicationToile->setText(toileY->toiExplicationToile());
 }
 
 // et le geodome
@@ -1458,13 +1516,46 @@ void fenPrincipale::exporterEnPDF()
         html += "<p align=center><img height=\"145\" width=\"526\" src=\":/images/hly/hlyTraverse\" /></p>";
         html += "<p><br /></p>";
         html += heliY->tableauTraverse();
-
-
+        html += "<p><br /><br /></p><p align=center><span style=\"font-size: 18pt; color: #000000;\"><strong>"+QObject::tr("L")+"</strong></span><span style=\"font-size: 14pt; color: #ff9900;\"><strong>"+QObject::tr("A TOILE")+"</strong></span></p>";
+        html += "<p>"+QObject::tr("Les résultats suivants on été obtenus avec les paramètres suivants : <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Largeur de laize : ")+"<strong>"+str.setNum(fenPrincipale::ui->hlyToileLargeurLaize->value(),'f',2)+" m</strong>";
+        html += QObject::tr("<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Orientation : ")+"<strong>"+str.setNum(fenPrincipale::ui->hlyToileOrientation->value())+" °</strong>";
+        html += QObject::tr("<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Décalage : ")+"<strong>"+str.setNum(fenPrincipale::ui->hlyToileDecalage->value(),'f',2)+" m</strong></p>";
+        html += "<p><br /></p>";
+        html += toileY->toiExplicationToile();
+        for(int i=0;i<1;i++)
+        {
+            QImage imaga(600,600,QImage::Format_RGB32);
+            toileY->toiDessinToileGeneral(&imaga,1);
+            imaga.save("imtoile.bmp");
+        }
+        html += "<p align=center><img src=\"imtoile.bmp\" /></p>";
+        for(int i=0;i<toileY->toiNombMorceaux();i++)
+        {
+            QString strrr;
+            QImage im(600,240,QImage::Format_RGB32);
+            toileY->toiDessinToileMorceau(&im,i);
+            im.save("im"+strrr.setNum(i+2)+".bmp");
+            html += "<p align=\"center\"><strong>"+QObject::tr("Morceau")+" ";
+            html += (char)(i+65);
+            html += "</strong></p>";
+            html += "<p align=\"center\"><img src=\"im"+strrr.setNum(i+2)+".bmp\" /></p>";
+            html += toileY->toiCoordMorceau(i);
+            html += "<p><br /></p>";
+        }
 
         doc.setHtml(html);
         doc.print(&printer); // impression de la page en utilisant le printer
         im1.setFileName("im1.bmp");
         im1.remove();
+        im1.setFileName("imtoile.bmp");
+        im1.remove();
+        for(int i=0;i<toileY->toiNombMorceaux();i++)
+        {
+            QString strrr;
+            im1.setFileName("im"+strrr.setNum(i+2)+".bmp");
+            im1.remove();
+        }
+
     break;
     case 4: //geodome
         //la on recupere les captures d ecrans 3D
@@ -2020,6 +2111,20 @@ void fenPrincipale::ouvrir(QString nom)
                         grandChild2 = grandChild2.nextSibling().toElement();
                     }
                 }
+            if (grandChild.tagName() == "toile")
+                {
+                    QDomElement grandChild2=grandChild.firstChild().toElement();
+                    while(!grandChild2.isNull())
+                    {
+                        if (grandChild2.tagName() == "largeurLaize")
+                            fenPrincipale::ui->hlyToileLargeurLaize->setValue(grandChild2.text().toDouble());
+                        if (grandChild2.tagName() == "orientation")
+                            fenPrincipale::ui->hlyToileOrientation->setValue(grandChild2.text().toInt());
+                        if (grandChild2.tagName() == "decalage")
+                            fenPrincipale::ui->hlyToileDecalage->setValue(grandChild2.text().toDouble());
+                        grandChild2 = grandChild2.nextSibling().toElement();
+                    }
+                }
             grandChild = grandChild.nextSibling().toElement();
         }
       }
@@ -2336,6 +2441,21 @@ void fenPrincipale::enregistrer()
     hlyCroixNoeud.appendChild(hlyCroixEpaisseurNoeud);
     hlyCroixNoeud.appendChild(hlyCroixRetombeeNoeud);
     hlyboisNoeud.appendChild(hlyCroixNoeud);
+
+    hlystructureNoeud.appendChild(hlyboisNoeud);
+
+    QDomElement hlyToileNoeud = doc.createElement("toile");
+    QDomElement hlyToileLargeurLaizeNoeud = doc.createElement("largeurLaize");
+    hlyToileLargeurLaizeNoeud.appendChild(doc.createTextNode(str.setNum((double)fenPrincipale::ui->hlyToileLargeurLaize->value(),'f',2)));
+    QDomElement hlyToileOrientationNoeud = doc.createElement("orientation");
+    hlyToileOrientationNoeud.appendChild(doc.createTextNode(str.setNum((double)fenPrincipale::ui->hlyToileOrientation->value(),'f',0)));
+    QDomElement hlyToileDecalageNoeud = doc.createElement("decalage");
+    hlyToileDecalageNoeud.appendChild(doc.createTextNode(str.setNum((double)fenPrincipale::ui->hlyToileDecalage->value(),'f',2)));
+    hlyToileNoeud.appendChild(hlyToileLargeurLaizeNoeud);
+    hlyToileNoeud.appendChild(hlyToileOrientationNoeud);
+    hlyToileNoeud.appendChild(hlyToileDecalageNoeud);
+
+    hlystructureNoeud.appendChild(hlyToileNoeud);
 
     structureNoeud.appendChild(hlystructureNoeud);
 

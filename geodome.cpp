@@ -57,6 +57,7 @@ void geodome::geoDessinSommet(QPaintDevice *des, int num)
     else
     {
         QPainter p(des);
+        p.setRenderHint(QPainter::Antialiasing);
         int rCer = 60;
         int lvec = 100;
         QRect dim = p.window();
@@ -124,6 +125,7 @@ void geodome::geoDessinFace(QPaintDevice *des, int num)
     else
     {
         QPainter p(des);
+        p.setRenderHint(QPainter::Antialiasing);
         int lvec = 250;
         int lang = 35;
         QRect dim = p.window();

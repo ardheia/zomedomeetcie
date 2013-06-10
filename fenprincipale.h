@@ -9,6 +9,7 @@
 #include "zome.h"
 #include "heliyourte.h"
 #include "geodome.h"
+#include "toileyourte.h"
 #include <QPushButton>
 #include <QPaintDevice>
 
@@ -95,6 +96,10 @@ private slots:
     void on_hlyRetombeePerches_valueChanged();
     void on_hlyRetombeeTonoo_valueChanged();
     void on_hlyRetombeeTraverse_valueChanged();
+    void on_hlyToileLargeurLaize_valueChanged();
+    void on_hlyToileOrientation_valueChanged();
+    void on_hlyToileDecalage_valueChanged();
+    void on_hlyToileChoixMorceau_currentIndexChanged(int choix);
 
     // la c est pour le geodome
     void on_geoSolideBase_currentIndexChanged(int choix);
@@ -141,6 +146,9 @@ private:
     //heliyourte
     void rafraichirResultatsHeliyourte();
     void heliTestBugBoutPerche();
+    void rafraichirResultatsHeliyourteToile();
+    void rafraichirResultatsHeliyourteToileMorceau(int ch);
+    void rafraichirHeliyourteToileDessinPrincipal();
 
     //geodome
     void rafraichirResultatsGeodome();
@@ -176,6 +184,7 @@ private:
     zome *zomito;
     heliyourte *heliY;
     geodome *geode;
+    ToileYourte *toileY;
 
     QWidget *fenetreAPropos;
     bool m_couleursDistinctes;

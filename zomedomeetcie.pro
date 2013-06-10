@@ -27,7 +27,8 @@ HEADERS += fenprincipale.h \
     heliyourte.h \
     heliyourte3d.h \
     geodome.h \
-    geodome3d.h
+    geodome3d.h \
+    toileyourte.h
 FORMS += fenprincipale.ui
 SOURCES += fenprincipale.cpp \
            glwidget.cpp \
@@ -46,7 +47,8 @@ SOURCES += fenprincipale.cpp \
     heliyourte.cpp \
     heliyourte3d.cpp \
     geodome.cpp \
-    geodome3d.cpp
+    geodome3d.cpp \
+    toileyourte.cpp
 RESOURCES += tousLesDocs.qrc
 RC_FILE += tousLesDocs.rc  
 TRANSLATIONS = zomedomeetcie_en.ts
