@@ -28,7 +28,7 @@ void ToileYourte::toiDessinToileGeneral(QPaintDevice *des, int taille)
     QRect dim;
     if(taille==0)
     {
-        dim = QRect(0,0,700,700);
+        dim = QRect(0,0,600,600);
     }
     else
     {

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1174</width>
-    <height>864</height>
+    <width>1159</width>
+    <height>855</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
        <enum>QTabWidget::West</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="ongletVouteNidAbeille">
        <attribute name="title">
@@ -127,7 +127,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>323</width>
-                       <height>595</height>
+                       <height>394</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -1350,7 +1350,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>586</width>
-                 <height>619</height>
+                 <height>609</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -4616,7 +4616,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>286</width>
-                       <height>595</height>
+                       <height>264</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -6926,7 +6926,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>267</width>
-                       <height>626</height>
+                       <height>216</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -8395,7 +8395,7 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>9</number>
           </property>
           <widget class="QWidget" name="ongletHeliyourteVisualisation">
            <attribute name="title">
@@ -8472,8 +8472,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>260</width>
-                       <height>639</height>
+                       <width>225</width>
+                       <height>174</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -9517,7 +9517,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>560</width>
-                 <height>296</height>
+                 <height>291</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_49">
@@ -10995,7 +10995,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>586</width>
-                 <height>785</height>
+                 <height>775</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_53">
@@ -14551,7 +14551,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>558</width>
-                 <height>292</height>
+                 <height>287</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_57">
@@ -16021,7 +16021,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>558</width>
-                 <height>292</height>
+                 <height>287</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_65">
@@ -17089,39 +17089,6 @@
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_51">
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_66">
-                  <item>
-                   <spacer name="horizontalSpacer_77">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <layout class="QGridLayout" name="hlyGrilleToileGeneral"/>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_72">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
                  <spacer name="horizontalSpacer_71">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
@@ -17133,6 +17100,58 @@
                    </size>
                   </property>
                  </spacer>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="scrollArea_8">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_8">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>522</width>
+                     <height>718</height>
+                    </rect>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_74">
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_66">
+                      <item>
+                       <spacer name="horizontalSpacer_77">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <layout class="QGridLayout" name="hlyGrilleToileGeneral"/>
+                      </item>
+                      <item>
+                       <spacer name="horizontalSpacer_72">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -17183,7 +17202,7 @@
                      <x>0</x>
                      <y>0</y>
                      <width>260</width>
-                     <height>369</height>
+                     <height>695</height>
                     </rect>
                    </property>
                    <attribute name="icon">
@@ -17228,6 +17247,13 @@
                         </property>
                        </widget>
                       </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="label_2">
+                        <property name="text">
+                         <string>orientation</string>
+                        </property>
+                       </widget>
+                      </item>
                       <item row="1" column="1">
                        <widget class="QSpinBox" name="hlyToileOrientation">
                         <property name="suffix">
@@ -17241,6 +17267,13 @@
                         </property>
                         <property name="value">
                          <number>0</number>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="label_5">
+                        <property name="text">
+                         <string>decalage</string>
                         </property>
                        </widget>
                       </item>
@@ -17263,20 +17296,6 @@
                         </property>
                         <property name="value">
                          <double>0.000000000000000</double>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="0">
-                       <widget class="QLabel" name="label_2">
-                        <property name="text">
-                         <string>orientation</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="0">
-                       <widget class="QLabel" name="label_5">
-                        <property name="text">
-                         <string>decalage</string>
                         </property>
                        </widget>
                       </item>
@@ -17309,19 +17328,6 @@
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer_23">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -17758,8 +17764,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>482</width>
-                 <height>183</height>
+                 <width>1066</width>
+                 <height>737</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_70">
@@ -18515,7 +18521,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>265</width>
-                       <height>613</height>
+                       <height>267</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -23232,7 +23238,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1174</width>
+     <width>1159</width>
      <height>25</height>
     </rect>
    </property>

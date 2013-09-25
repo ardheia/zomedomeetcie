@@ -800,6 +800,7 @@ void fenPrincipale::rafraichirResultatsHeliyourte()
 void fenPrincipale::on_hlyDiametreYourte_valueChanged()
 {
     rafraichirHeliyourte();
+    rafraichirResultatsHeliyourteToile();
 }
 
 void fenPrincipale::on_hlyEpaisseurCroix_valueChanged()
@@ -816,17 +817,20 @@ void fenPrincipale::on_hlyEpaisseurPerche_valueChanged()
 void fenPrincipale::on_hlyHauteurMur_valueChanged()
 {
     rafraichirHeliyourte();
+    rafraichirResultatsHeliyourteToile();
 }
 
 void fenPrincipale::on_hlyNombrePans_valueChanged()
 {
     rafraichirHeliyourte();
+    rafraichirResultatsHeliyourteToile();
 }
 
 void fenPrincipale::on_hlyPenteToit_valueChanged()
 {
     heliTestBugBoutPerche();
     rafraichirHeliyourte();
+    rafraichirResultatsHeliyourteToile();
 }
 
 void fenPrincipale::on_hlyPercheDepassementHaut_valueChanged()
@@ -936,7 +940,7 @@ void fenPrincipale::rafraichirResultatsHeliyourteToileMorceau(int ch)
 void fenPrincipale::rafraichirHeliyourteToileDessinPrincipal()
 {
     QLabel* image2 = new QLabel();
-    QPixmap pix2(700,700);
+    QPixmap pix2(600,600);
     toileY->toiDessinToileGeneral(&pix2,0);
     image2->setPixmap(pix2);
     fenPrincipale::ui->hlyGrilleToileGeneral->addWidget(image2,0.0,0.0);
