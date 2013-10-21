@@ -1616,7 +1616,7 @@ void fenPrincipale::exporterEnPDF()
             QImage im2(300,370,QImage::Format_RGB32);
             geode->geoDessinFace(&im2,geode->typeFace.size()-1);
             im2.save("im"+strrr.setNum(geode->typeFace.size()+1)+".bmp");
-            html += "<tr><td><p align=\"center\"><img src=\"im"+strrr.setNum(geode->typeFace.size()-1)+".bmp\" /></p></td><td><p align=\"center\"></p></td></tr>";
+            html += "<tr><td><p align=\"center\"><img src=\"im"+strrr.setNum(geode->typeFace.size()+1)+".bmp\" /></p></td><td><p align=\"center\"></p></td></tr>";
         }
         html += "</tbody></table>";
         html += "<p><br /><br /></p><p align=center><span style=\"font-size: 18pt; color: #000000;\"><strong>"+QObject::tr("A")+"</strong></span><span style=\"font-size: 14pt; color: #ff9900;\"><strong>"+QObject::tr("RETES")+"</strong></span></p>";
@@ -1646,7 +1646,7 @@ void fenPrincipale::exporterEnPDF()
             QImage im2(300,370,QImage::Format_RGB32);
             geode->geoDessinSommet(&im2,geode->typeSommet.size()-1);
             im2.save("im"+strrr.setNum(geode->typeSommet.size()+1)+".bmp");
-            html += "<tr><td><p align=\"center\"><img src=\"im"+strrr.setNum(geode->typeSommet.size()-1)+".bmp\" /></p></td><td><p align=\"center\"></p></td></tr>";
+            html += "<tr><td><p align=\"center\"><img src=\"im"+strrr.setNum(geode->typeSommet.size()+1)+".bmp\" /></p></td><td><p align=\"center\"></p></td></tr>";
         }
         html += "</tbody></table>";
 

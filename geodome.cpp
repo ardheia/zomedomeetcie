@@ -220,9 +220,9 @@ QString geodome::tableauFaces(int i)
     else
         wid = "";
     tableau = "<table "+wid+" cellpadding=\"2\" border=\"1\" align=\"center\"><tbody><tr>";
-    tableau += "<td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Nombre")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Surface")+" (m2)</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type Arêtes")+"</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L1 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L2 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L3 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>H (m)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha 1 (°)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha 2 (°)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha3 (°)</strong></p></td></tr>";
+    tableau += "<td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Nombre")+"</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Surface")+" (m2)</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>"+QObject::tr("Type Arêtes")+"</strong></p></td bgcolor=\"#cccc99\"><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L1 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L2 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>L3 (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>H (cm)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha 1 (°)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha 2 (°)</strong></p></td><td bgcolor=\"#cccc99\"><p align=\"center\"><strong>Alpha3 (°)</strong></p></td></tr>";
     for(int i=0;i<typeFace.size();i++)
-        tableau += "<tr><td bgcolor=\""+couleurInternet(i)+"\"><p align=\"center\"><strong>f"+str.setNum(i)+"</strong></p></td><td><p align=\"center\">"+str2.setNum(typeFace[i].fa.size())+"</p></td><td><p align=\"center\">"+str3.setNum(typeFace[i].surface,'f',2)+"</p></td><td><p align=\"center\">"+str4.setNum(typeFace[i].typar1)+"->"+str5.setNum(typeFace[i].typar2)+"->"+str6.setNum(typeFace[i].typar3)+"</p></td><td><p align=\"center\">"+str7.setNum(typeArete[typeFace[i].typar1].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str8.setNum(typeArete[typeFace[i].typar2].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str9.setNum(typeArete[typeFace[i].typar3].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str10.setNum(typeFace[i].h1,'f',2)+"</p></td><td><p align=\"center\">"+str11.setNum(degres(typeFace[i].angle1),'f',1)+"</p></td><td><p align=\"center\">"+str12.setNum(degres(typeFace[i].angle2),'f',1)+"</p></td><td><p align=\"center\">"+str13.setNum(degres(typeFace[i].angle3),'f',1)+"</p></td></tr>";
+        tableau += "<tr><td bgcolor=\""+couleurInternet(i)+"\"><p align=\"center\"><strong>f"+str.setNum(i)+"</strong></p></td><td><p align=\"center\">"+str2.setNum(typeFace[i].fa.size())+"</p></td><td><p align=\"center\">"+str3.setNum(typeFace[i].surface,'f',2)+"</p></td><td><p align=\"center\">"+str4.setNum(typeFace[i].typar1)+"->"+str5.setNum(typeFace[i].typar2)+"->"+str6.setNum(typeFace[i].typar3)+"</p></td><td><p align=\"center\">"+str7.setNum(typeArete[typeFace[i].typar1].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str8.setNum(typeArete[typeFace[i].typar2].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str9.setNum(typeArete[typeFace[i].typar3].longueur*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str10.setNum(typeFace[i].h1*100.0,'f',1)+"</p></td><td><p align=\"center\">"+str11.setNum(degres(typeFace[i].angle1),'f',1)+"</p></td><td><p align=\"center\">"+str12.setNum(degres(typeFace[i].angle2),'f',1)+"</p></td><td><p align=\"center\">"+str13.setNum(degres(typeFace[i].angle3),'f',1)+"</p></td></tr>";
     int tot_faces = 0;
     for(int i = 0;i<typeFace.size();i++)
         tot_faces += typeFace[i].fa.size();
@@ -1827,6 +1827,8 @@ void geodome::calcul()
         }
     }
     geoHauteurReelle = geo_hauteur-bas;
+    if(bas==5000)
+        geoHauteurReelle = geo_diametre;
 
     if((tron)&&(geo_sabliereHorizontale==1))
         for(int i=0;i<TsLesSomm.size();i++)
@@ -1852,7 +1854,7 @@ void geodome::calcul()
             do
             {
                 compteur++;
-                if(qAbs(typeArete[compteur].longueur-taille)<0.01)
+                if(qAbs(typeArete[compteur].longueur-taille)<0.001)
                 {
                     typeArete[compteur].ar << i;
                     TsLesAretes[i].typ = compteur;

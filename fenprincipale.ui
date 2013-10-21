@@ -27,7 +27,7 @@
        <enum>QTabWidget::West</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="ongletVouteNidAbeille">
        <attribute name="title">
@@ -127,7 +127,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>323</width>
-                       <height>394</height>
+                       <height>586</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -4616,7 +4616,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>286</width>
-                       <height>264</height>
+                       <height>586</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -6926,7 +6926,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>267</width>
-                       <height>216</height>
+                       <height>617</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -8395,7 +8395,7 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>9</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="ongletHeliyourteVisualisation">
            <attribute name="title">
@@ -8472,8 +8472,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>225</width>
-                       <height>174</height>
+                       <width>260</width>
+                       <height>630</height>
                       </rect>
                      </property>
                      <attribute name="icon">
@@ -17111,8 +17111,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>522</width>
-                     <height>718</height>
+                     <width>98</width>
+                     <height>40</height>
                     </rect>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_74">
@@ -17201,8 +17201,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>260</width>
-                     <height>695</height>
+                     <width>227</width>
+                     <height>113</height>
                     </rect>
                    </property>
                    <attribute name="icon">
@@ -17764,8 +17764,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1066</width>
-                 <height>737</height>
+                 <width>482</width>
+                 <height>183</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_70">
@@ -18521,7 +18521,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>265</width>
-                       <height>267</height>
+                       <height>604</height>
                       </rect>
                      </property>
                      <attribute name="icon">
