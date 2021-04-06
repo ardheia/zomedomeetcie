@@ -13,6 +13,8 @@
 #include "mathema.h"
 #include "parametres.h"
 
+const QString siteUrl = "http://ardheia.fr" ; // "https://ardheia.fr/ardheia/" ; // "http://ardheia.free.fr"
+
 fenPrincipale::fenPrincipale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::fenPrincipale)
@@ -141,7 +143,7 @@ void fenPrincipale::designFenetreAPropos()
     texteApropos->setOpenExternalLinks(true);
     texteApropos->setAcceptRichText(true);
     QString texteHTMLApropos;
-    texteHTMLApropos = "<html><p align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Ce programme open-source")+" <a href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/fr/\"><img height=\"31\" width=\"88\" src=\":/images/licenseCC\" /></a> "+QObject::tr("est développé par")+"<strong> "+QObject::tr("l\'association")+" <a href=\"http://ardheia.free.fr\">"+QObject::tr("ARDHEIA")+"</a></strong>.</p>";
+    texteHTMLApropos = "<html><p align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Ce programme open-source")+" <a href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/fr/\"><img height=\"31\" width=\"88\" src=\":/images/licenseCC\" /></a> "+QObject::tr("est développé par")+"<strong> "+QObject::tr("l\'association")+" <a href=\"" + siteUrl + "\">"+QObject::tr("ARDHEIA")+"</a></strong>.</p>";
     texteHTMLApropos += "<p align=center><img src=\":/images/logoArdheia\" /></p>";
     texteHTMLApropos += "<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Il est toujours en cours de développement, l'idée étant de réunir toutes nos anciens tableurs (dome,zome ...) en un programme plus convivial et fiable. Pour l'instant, vous pouvez visualiser les voutes,les dômes en nid d'abeille, les zomes, les héliyourtes (et la toile), les géodomes")+". <em><strong>"+QObject::tr("A venir")+" :</strong></em> "+QObject::tr("Dôme Pomme de pin ...")+"</p>";
     texteHTMLApropos += "<p align=justify>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Il est désormais possible d\'exporter n\'importe quelle vue 3D au format Wavefront Obj, pour l\'ouvrir avec un autre logiciel de 3D (Blender, Sketchup ...). Ceci peut être intéressant pour situer les structures dans des environnements ou pour prendre des côtes facilement")+".</p>";
@@ -1302,7 +1304,7 @@ void fenPrincipale::exporterEnPDF()
 
         // on donne au QTextEdit le code HTML a interpreter
         html = "<p align=center><span style=\"font-size: 18pt; color: #000000;\"><strong>"+QObject::tr("Compte-rendu technique d'une Voute avec la technique Nid d'Abeille")+"</strong></span></p>";
-        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"http://ardheia.free.fr\">http://ardheia.free.fr</a></em></span></p>";
+        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"" + siteUrl + "\">" + siteUrl + "</a></em></span></p>";
         html += "<p align=right><img height=\"91\" width=\"220\" src=\":/images/logoArdheia\" /></p>";
         html += "<p><br /><br /></p><p align=center><img src=\"im1.bmp\" /></p>";
         html += "<p><br /><br /></p><p align=center><span style=\"font-size: 18pt; color: #ff9900;\"><strong>"+QObject::tr("M")+"</strong></span><span style=\"font-size: 14pt; color: #000000;\"><strong>"+QObject::tr("ETHODE DE CONSTRUCTION")+"</strong></span></p>";
@@ -1389,7 +1391,7 @@ void fenPrincipale::exporterEnPDF()
 
         // on donne au QTextEdit le code HTML a interpreter
         html = "<p align=center><span style=\"font-size: 18pt; color: #000000;\"><strong>"+QObject::tr("Compte-rendu technique d'un Dôme avec la technique Nid d'Abeille")+"</strong></span></p>";
-        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"http://ardheia.free.fr\">http://ardheia.free.fr</a></em></span></p>";
+        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"" + siteUrl + "\">" + siteUrl + "</a></em></span></p>";
         html += "<p align=right><img height=\"91\" width=\"220\" src=\":/images/logoArdheia\" /></p>";
         html += "<p><br /><br /></p><p align=center><img src=\"im1.bmp\" /></p>";
         html += "<p><br /><br /></p><p align=center><span style=\"font-size: 18pt; color: #ff9900;\"><strong>"+QObject::tr("M")+"</strong></span><span style=\"font-size: 14pt; color: #000000;\"><strong>"+QObject::tr("ETHODE DE CONSTRUCTION")+"</strong></span></p>";
@@ -1437,7 +1439,7 @@ void fenPrincipale::exporterEnPDF()
 
         // on donne au QTextEdit le code HTML a interpreter
         html = "<p align=center><span style=\"font-size: 18pt; color: #000000;\"><strong>"+QObject::tr("Compte-rendu technique d'un Zome")+"</strong></span></p>";
-        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"http://ardheia.free.fr\">http://ardheia.free.fr</a></em></span></p>";
+        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"" + siteUrl + "\">" + siteUrl + "</a></em></span></p>";
         html += "<p align=right><img height=\"91\" width=\"220\" src=\":/images/logoArdheia\" /></p>";
         html += "<p><br /><br /></p><p align=center><img src=\"im1.bmp\" /></p>";
         html += "<p><br /><br /></p><p align=center><span style=\"font-size: 18pt; color: #ff9900;\"><strong>"+QObject::tr("M")+"</strong></span><span style=\"font-size: 14pt; color: #000000;\"><strong>"+QObject::tr("ETHODE DE CONSTRUCTION")+"</strong></span></p>";
@@ -1480,7 +1482,7 @@ void fenPrincipale::exporterEnPDF()
 
         // on donne au QTextEdit le code HTML a interpreter
         html = "<p align=center><span style=\"font-size: 18pt; color: #000000;\"><strong>"+QObject::tr("Compte-rendu technique d'une Héliyourte")+"</strong></span></p>";
-        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"http://ardheia.free.fr\">http://ardheia.free.fr</a></em></span></p>";
+        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"" + siteUrl + "\">" + siteUrl + "</a></em></span></p>";
         html += "<p align=right><img height=\"91\" width=\"220\" src=\":/images/logoArdheia\" /></p>";
         html += "<p><br /><br /></p><p align=center><img src=\"im1.bmp\" /></p>";
         html += "<p><br /><br /></p><p align=center><span style=\"font-size: 18pt; color: #ff9900;\"><strong>"+QObject::tr("M")+"</strong></span><span style=\"font-size: 14pt; color: #000000;\"><strong>"+QObject::tr("ETHODE DE CONSTRUCTION")+"</strong></span></p>";
@@ -1586,7 +1588,7 @@ void fenPrincipale::exporterEnPDF()
             cha = "V "+str.setNum(fenPrincipale::ui->geoFrequenceA->value())+" "+str2.setNum(fenPrincipale::ui->geoFrequenceB->value());
         // on donne au QTextEdit le code HTML a interpreter
         html = "<p align=center><span style=\"font-size: 18pt; color: #000000;\"><strong>"+QObject::tr("Compte-rendu technique d'un Geodome")+" "+cha+"</strong></span></p>";
-        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"http://ardheia.free.fr\">http://ardheia.free.fr</a></em></span></p>";
+        html += "<p align=right><span style=\"font-size: 12pt; color: #000000;\"><em>"+QObject::tr("Document généré automatiquement par le logiciel ZomeDomeEtCie (version")+" "+version()+") "+QObject::tr("développé par l'association ARDHEIA")+" <a href=\"" + siteUrl + "\">" + siteUrl + "</a></em></span></p>";
         html += "<p align=right><img height=\"91\" width=\"220\" src=\":/images/logoArdheia\" /></p>";
         html += "<p><br /><br /></p><p align=center><img src=\"im1.bmp\" /></p>";
         html += "<p><br /></p>";
@@ -2199,7 +2201,7 @@ void fenPrincipale::enregistrer()
     QDomDocument doc(impl.createDocumentType(name,publicId,systemId));
 
     doc.appendChild(doc.createComment("Ce fichier est fichier de sauvegarde du logiciel ZomeDomeEtCie développé par l'association ARDHEIA"));
-    doc.appendChild(doc.createComment("http://ardheia.free.fr"));
+    doc.appendChild(doc.createComment( siteUrl ));
     doc.appendChild(doc.createComment("La version du logiciel est la : "+version()));
     doc.appendChild(doc.createTextNode("\n")); // on retourne a la ligne
 
