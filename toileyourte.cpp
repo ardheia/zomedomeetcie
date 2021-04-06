@@ -4,6 +4,8 @@
 #include "QPainter"
 #include "parametres.h"
 
+const QString siteUrl = "http://ardheia.fr" ; // "https://ardheia.fr/ardheia/" ; // "http://ardheia.free.fr"
+
 ToileYourte::ToileYourte()
 {
 }
@@ -329,7 +331,7 @@ QString ToileYourte::toiExplicationToile()
     resu += "<p><br /></p>";
     resu += "<p><span style=\"font-size: 12pt; color: #ff9900;\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D) "+QObject::tr("La Couture")+"</strong></span></p>";
     resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Nous vous conseillons d\'utiliser le type de couture D que nous expliquons dans notre document dédié à la couture de toile que vous trouverez ")+"<a href=\"http://ardheia.free.fr/documents_ardheia/toiles.pdf\">"+QObject::tr("ici")+"</a>.</p>";
-    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Après avoir découpé tous les morceaux de toit, vous pouvez les assembler en veillant à respecter le sens d'écoulement de l\'eau. Une fois tous les morceaux assemblés, vous pouvez faire la couture qui \'ferme\' le cone de toit, en gardant toujours en tête l\'écoulement de l\'eau. Puis vous ferez un petit ourlet au niveau du tonoo, et vous rajouterez la bande en bas de toit, sur laquelle vous aurez préalablement fais un ourlet avec la corde dedans (lorsque vous faites un ourlet avec une corde qui passe à l\'intérieur, n'\hésitez pas à faire un ourlet suffisamment grand pour que la corde puisse coulisser, et veillez à passer la corde au fur et à mesure de la réalisation de l\'ourlet, ça sera beaucoup plus simple que de la faire passer à la fin !!!)")+".</p>";
+    resu += "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+QObject::tr("Après avoir découpé tous les morceaux de toit, vous pouvez les assembler en veillant à respecter le sens d'écoulement de l\'eau. Une fois tous les morceaux assemblés, vous pouvez faire la couture qui \'ferme\' le cone de toit, en gardant toujours en tête l\'écoulement de l\'eau. Puis vous ferez un petit ourlet au niveau du tonoo, et vous rajouterez la bande en bas de toit, sur laquelle vous aurez préalablement fais un ourlet avec la corde dedans (lorsque vous faites un ourlet avec une corde qui passe à l\'intérieur, n\'hésitez pas à faire un ourlet suffisamment grand pour que la corde puisse coulisser, et veillez à passer la corde au fur et à mesure de la réalisation de l\'ourlet, ça sera beaucoup plus simple que de la faire passer à la fin !!!)")+".</p>";
 
 
 
